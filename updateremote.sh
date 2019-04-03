@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LOCALDIR=/opt/lampp/var/mysql/cinemaDB
-USERNAME=parva
+LOCALDIR=/Applications/XAMPP/xamppfiles/var/mysql/cinemaDB
+USERNAME=Lynn
 
 echo "This will overwrite the current GIT database"
 printf "Continue(y/n)?"
@@ -11,8 +11,8 @@ if [ "$confirm" != "${confirm#[Yy]}" ] ;then
     cp -r $LOCALDIR cinemaDB
     chown $USERNAME cinemaDB
     chown $USERNAME cinemaDB/*
-    chgrp $USERNAME cinemaDB
-    chgrp $USERNAME cinemaDB/*
+    chgrp staff cinemaDB
+    chgrp staff cinemaDB/*
     echo "Completed"
 else
     echo "Aborted"
