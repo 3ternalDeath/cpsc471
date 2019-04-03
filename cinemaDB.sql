@@ -40,7 +40,7 @@ CREATE TABLE 'Cinema'(
 CREATE TABLE 'Food'(
     'foodID' SMALLINT NOT NULL AUTO_INCREMENT,
     namee VARCHAR(255) NOT NULL,
-    typee VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
     price DOUBLE(4, 2) NOT NULL,
     size VARCHAR(255) NOT NULL,
     description VARCHAR(255),
