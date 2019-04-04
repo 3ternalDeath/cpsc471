@@ -1,11 +1,11 @@
 //create user account
 <?php
 
-$userName = $_POST["userName"];
-$passwd = $_POST["passwd"];
+$userName = $_POST["username"];
+$passwd = $_POST["password"];
 $CCInfo = $_POST["CCInfo"];
 $age = $_POST["age"];
-$namee = $_POST["namee"];
+$namee = $_POST["name"];
 $phoneNumber = $_POST["phoneNumber"];
 
 echo $userName. "<br>";
