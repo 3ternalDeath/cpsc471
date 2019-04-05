@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LOCALDIR=/Applications/XAMPP/xamppfiles/var/mysql/cinemaDB
-SQLUSER=_mysql
+LOCALDIR=/opt/lampp/var/mysql/cinemaDB
+SQLUSER=mysql
 
 echo "This will overwrite the current LOCAL database"
 printf "Continue(y/n)?"

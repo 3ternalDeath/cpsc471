@@ -3,7 +3,7 @@ CREATE DATABASE cinemaDB;
 USE `cinemaDB`;
 CREATE TABLE OverSeer(
     userName VARCHAR(255) NOT NULL,
-    namee VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     passwd VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(10) NOT NULL,
     adminFlag BIT,
@@ -14,16 +14,16 @@ CREATE TABLE OverSeer(
 CREATE TABLE Customer(
     userName VARCHAR(50) NOT NULL,
     passwd VARCHAR(255) NOT NULL,
-    CCInfo VARCHAR(255),
+    CCInfo VARCHAR(255) DEFAULT NULL,
     age TINYINT,
-    namee VARCHAR(255),
+    name VARCHAR(255),
     phoneNumber VARCHAR(10),
     PRIMARY KEY(username)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE Actor(
     IMDBID INT NOT NULL,
-    namee VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     gender VARCHAR(50),
     yearsActive VARCHAR(255),
     PRIMARY KEY(IMDBID)
@@ -31,7 +31,7 @@ CREATE TABLE Actor(
 
 CREATE TABLE Cinema(
     address VARCHAR(255) NOT NULL,
-    namee VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     phoneNumber VARCHAR(10) NOT NULL,
     policy VARCHAR(255),
     PRIMARY KEY(address)
@@ -39,7 +39,7 @@ CREATE TABLE Cinema(
 
 CREATE TABLE Food(
     foodID SMALLINT NOT NULL AUTO_INCREMENT,
-    namee VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     price DOUBLE(4, 2) NOT NULL,
     size VARCHAR(255) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE Food(
 CREATE TABLE Movie(
     IMDBID INT NOT NULL,
     addedBy VARCHAR(255),
-    namee VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     runTime TIME NOT NULL,
     producer VARCHAR(255),
     synopsis TEXT,
@@ -154,3 +154,70 @@ CREATE TABLE Ticket(
     ) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY(customer) REFERENCES Customer(username) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+DELIMITER $
+
+CREATE TRIGGER chkCust BEFORE INSERT ON Customer FOR EACH ROW
+BEGIN
+  IF NEW.userName = '' OR NEW.passwd = '' THEN
+    SIGNAL SQLSTATE '45000' ;
+  ELSEIF CHAR_LENGTH(NEW.phoneNumber) <> 10 AND NEW.phoneNumber IS NOT NULL THEN
+    SIGNAL SQLSTATE '45000' ;
+    END IF ;
+  END ;$
+
+CREATE TRIGGER upCust BEFORE UPDATE ON Customer FOR EACH ROW
+BEGIN
+  IF NEW.passwd = '' THEN
+    SIGNAL SQLSTATE '45000' ;
+  ELSEIF CHAR_LENGTH(NEW.phoneNumber) <> 10 AND NEW.phoneNumber IS NOT NULL THEN
+    SIGNAL SQLSTATE '45000' ;
+    END IF ;
+  END ;$
+
+CREATE TRIGGER chkOver BEFORE INSERT ON OverSeer FOR EACH ROW
+  BEGIN
+    IF NEW.userName = '' OR NEW.passwd = '' OR CHAR_LENGTH(NEW.phoneNumber) <> 10 OR NEW.name = '' OR NEW.adminFlag = NEW.manFlag THEN
+      SIGNAL SQLSTATE '45000' ;
+      END IF ;
+    END ;$
+
+CREATE TRIGGER chkActo BEFORE INSERT ON Actor FOR EACH ROW
+BEGIN
+  IF NEW.name = '' OR NEW.gender = '' OR NEW.yearsActive = '' THEN
+    SIGNAL SQLSTATE '45000' ;
+    END IF ;
+  END ;$
+
+CREATE TRIGGER upActo BEFORE UPDATE ON Actor FOR EACH ROW
+BEGIN
+  IF NEW.name = '' OR NEW.gender = '' OR NEW.yearsActive = '' THEN
+    SIGNAL SQLSTATE '45000' ;
+    END IF ;
+  END ;$
+
+CREATE TRIGGER chkCin BEFORE INSERT ON Cinema FOR EACH ROW
+BEGIN
+  IF NEW.address = '' OR NEW.name = '' OR CHAR_LENGTH(NEW.phoneNumber) <> 10 THEN
+    SIGNAL SQLSTATE '45000' ;
+    END IF ;
+  END ;$
+
+CREATE TRIGGER upCin BEFORE UPDATE ON Cinema FOR EACH ROW
+BEGIN
+  IF NEW.address = '' OR NEW.name = '' OR CHAR_LENGTH(NEW.phoneNumber) <> 10 THEN
+    SIGNAL SQLSTATE '45000' ;
+    END IF ;
+  END ;$
+
+
+DELIMITER ;
+
+/*ALTER TABLE OverSeer CHANGE `namee` `name` varchar(255);
+ALTER TABLE Customer CHANGE `namee` `name` varchar(255);
+ALTER TABLE Actor CHANGE `namee` `name` varchar(255);
+ALTER TABLE Cinema CHANGE `namee` `name` varchar(255);
+ALTER TABLE Food CHANGE `namee` `name` varchar(255);
+ALTER TABLE Movie CHANGE `namee` `name` varchar(255);
+*/

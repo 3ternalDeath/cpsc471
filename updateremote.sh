@@ -1,8 +1,8 @@
 #!/bin/bash
 
-LOCALDIR=/Applications/XAMPP/xamppfiles/var/mysql/cinemaDB
-USERNAME=Lynn
-GRPNAME=staff
+LOCALDIR=/opt/lampp/var/mysql/cinemaDB
+USERNAME=parva
+GRPNAME=users
 
 echo "This will overwrite the current GIT database"
 printf "Continue(y/n)?"
