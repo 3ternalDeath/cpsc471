@@ -28,12 +28,11 @@
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 
-	$sql =  "SELECT namee, phoneNumber, manFlag FROM OverSeer WHERE userName = '$username'";
+	$sql =  "SELECT name, phoneNumber, manFlag FROM OverSeer WHERE userName = '$username'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	//$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
    // $active = $row['active'];
-
 	$count = mysqli_num_rows($result);
  if (!mysqli_query($con,$sql))
   {
@@ -43,7 +42,7 @@
   if($count == 1){
 	  //login as admin
 	  echo '<div style="position:absolute; top:100px; left: 600px"> username:  '.$username.' </div>';
-	  echo '<div style="position:absolute; top:130px; left: 600px"> name:  '.$row["namee"].' </div>';
+	  echo '<div style="position:absolute; top:130px; left: 600px"> name:  '.$row["name"].' </div>';
 	  echo '<div style="position:absolute; top:160px; left: 600px"> phoneNumber: '.$row["phoneNumber"].' </div>';
 	  if( $row["manFlag"]==1){
 		  echo '<div style="position:absolute; top:190px; left: 600px"> position: manager </div>';}

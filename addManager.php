@@ -1,9 +1,8 @@
 
 <html>
-<title>Registration</title>	
 	<style>		
 		form {
-			padding: 80px 20px;
+			padding: 100px 20px;
 			position: absolute;
 			left: 600px;
 			front-size: 30px;}		
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
 	$userName = $_POST["username"];
 	$passwd = $_POST["password"];
-	$namee = $_POST["name"];
+	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
 	$mFlag = true;
 	$admFlag=false;
@@ -48,11 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-  $sql = "INSERT INTO OverSeer (userName, passwd, namee, phoneNumber,adminFlag , manFlag) VALUES ('". $userName ."','". $passwd ."','". $namee ."','". $phoneNumber ."' ,'".$admFlag."','".$mFlag."')";
+  $sql = "INSERT INTO OverSeer (userName, passwd, name, phoneNumber,adminFlag , manFlag) VALUES ('". $userName ."','". $passwd ."','". $name ."','". $phoneNumber ."' ,'".$admFlag."','".$mFlag."')";
 
 	if (!mysqli_query($con,$sql))
 	{
-		echo"<p align='center' style='color:red'>invalid username</p>";
+		if($userName==""){echo"<p align='center' style='color:red'>username field cannot be emplty</p>";}
+		if($passwd==""){echo"<p align='center' style='color:red'>password field cannot be empty</p>";}
+		if($name==""){echo"<p align='center' style='color:red'>name field cannot be empty</p>";}
+		if($phoneNumber==""){echo"<p align='center' style='color:red'>phoneNumber field cannot be empty</p>";}
+		else{
+		echo"<p align='center' style='color:red'>username is already registered</p>";}
 		die();
 	}
 	else{

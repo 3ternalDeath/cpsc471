@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$passwd = $_POST["password"];
 	$CCInfo = $_POST["CCInfo"];
 	$age = $_POST["age"];
-	$namee = $_POST["name"];
+	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
 
 
@@ -56,11 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-  $sql = "INSERT INTO Customer (userName, passwd, CCInfo, age, namee, phoneNumber) VALUES ('". $userName ."','". $passwd ."','". $CCInfo ."','". $age ."','". $namee ."','". $phoneNumber ."')";
+  $sql = "INSERT INTO Customer (userName, passwd, CCInfo, age, name, phoneNumber) VALUES ('". $userName ."','". $passwd ."','". $CCInfo ."','". $age ."','". $name ."','". $phoneNumber ."')";
 
 	if (!mysqli_query($con,$sql))
 	{
-		echo"<p align='center' style='color:red'>invalid username</p>";
+		if($userName==""){echo"<p align='center' style='color:red'>username field cannot be emplty</p>";}
+		if($passwd==""){echo"<p align='center' style='color:red'>password field cannot be empty</p>";}
+		if($CCInfo==""){echo"<p align='center' style='color:red'>credit card field cannot be empty</p>";}
+		if($phoneNumber==""){echo"<p align='center' style='color:red'>phoneNumber field cannot be empty</p>";}
+		else{
+		echo"<p align='center' style='color:red'>username is already registered</p>";}
 	}
 	else{
 		header("Location:index.php");

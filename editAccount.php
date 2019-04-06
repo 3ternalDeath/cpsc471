@@ -9,7 +9,7 @@
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 
-	$sql =  "SELECT namee, phoneNumber, passwd FROM OverSeer WHERE userName = '$username'";
+	$sql =  "SELECT name, phoneNumber, passwd FROM OverSeer WHERE userName = '$username'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
@@ -19,16 +19,16 @@
   }
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$namee = $_POST["name"];
+	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
 	$passwd = $_POST["password"];
-	if($namee==""){
-		$namee = $row["namee"];
+	if($name==""){
+		$name = $row["name"];
 		$phoneNumber = $row["phoneNumber"];
 		$passwd = $row["passwd"];
 	}
 	
-	$sql = "UPDATE OverSeer SET passwd='".$passwd."', namee='".$namee."', phoneNumber='".$phoneNumber."' WHERE userName = '$username' ";
+	$sql = "UPDATE OverSeer SET passwd='".$passwd."', name='".$name."', phoneNumber='".$phoneNumber."' WHERE userName = '$username' ";
 	
 	 if (!mysqli_query($con,$sql))
   {
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
 	<h1><?php echo $username;?></h1><br/>
 	<label>Update name: </label><br/>
-    <input type="text" name="name" value=<?php echo $row["namee"];?>><br/><br/>
+    <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>
 	<label>New Password :</label><br>
     <input type="password" name="password" value=<?php echo $row["passwd"];?>><br/><br/>
 	<label>Update PhoneNumber :</label><br>

@@ -4,14 +4,14 @@ $username = $_SESSION['admName'];
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+
 <style>
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 20%;
-  background-color: #f1f1f1;
+  background: rgba(135, 211, 124, 0.5);
   position: fixed;
   height: 97%;
   overflow: auto;
@@ -36,17 +36,17 @@ li a:hover:not(.active) {
 
 body { 
 
-  background-image: url("images3.jpg");
+  background-image: url("image3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 } 
 </style>
-</head>
+
 <body>
 
 <ul>
   <li><a class="active" href="adminAccount.php">Home</a></li>
-  <li><a href="#Search Manager">Search Manager</a></li>
+  <li><a href="searchManager.php">Search Manager</a></li>
   <li><a href="addManager.php">Add Manager</a></li>
   <li><a href="#Search Movie">Search Movie</a></li>
   <li><a href="addMovie.php">Add Movie</a></li>

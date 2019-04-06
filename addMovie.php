@@ -22,9 +22,9 @@
     <input type="text" name="director"/><br/><br/>
 	
 	</div>
-	<div style="padding: 120px 20px;
+	<div style="padding: 110px 20px;
 			position: absolute;
-			left: 800px;
+			left: 700px;
 			front-size: 30px;">
 			
 	<label>Format:</label><br>
@@ -48,7 +48,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
 	$IMDBID = $_POST["IMDBID"];
-	$namee = $_POST["movieName"];
+	$name = $_POST["movieName"];
 	$runTime = $_POST["runTime"];
 	$producer = $_POST["producer"];
 	$synopsis = $_POST["synopsis"];
@@ -65,13 +65,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  $sql = "INSERT INTO Movie (addedBy, IMDBID, namee, runTime, producer , synopsis, director, format, releaseDate, writer) 
-  VALUES ('". $username ."','". $IMDBID ."','". $namee ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."')";
+  $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer) 
+  VALUES ('". $username ."','". $IMDBID ."','". $name ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."')";
 
 	if (!mysqli_query($con,$sql))
 	{
-		echo"<p align='center' style='color:red'>opps something wrong!</p>";
-		die('Error: ' . mysqli_error($con));
+		if($IMDBID==""){echo"<p align='center' style='color:red'>IMDBID field cannot be emplty</p>";}
+		if($name==""){echo"<p align='center' style='color:red'>name field cannot be empty</p>";}
+		if($runTime==""){echo"<p align='center' style='color:red'>runTime field cannot be empty</p>";}
+		if($releaseDate==""){echo"<p align='center' style='color:red'>releaseDater field cannot be empty</p>";}
+		else{
+		echo"<p align='center' style='color:red'>IMDBID is already registered</p>";}
+		
 		die();
 	}
 	else{
