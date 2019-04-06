@@ -34,10 +34,8 @@
 			top: 374px;}
 			
 		body {
-  background-image: url("images.jpg");
-  
-} 
-			
+			background-image: url("images.jpg");
+		} 			
 	</style>
 	
 </head>
@@ -55,8 +53,8 @@
 </form>
 
 <?php
+//run only if user clicked login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	//echo "hi";
 	$userName = $_POST["username"];
 	$passwd = $_POST["password"];
 
@@ -68,33 +66,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-
+	
+//authenticate user
 	$sql =  "SELECT userName, passwd, adminFlag FROM OverSeer WHERE userName = '$userName' and passwd = '$passwd'";
 	$result = mysqli_query($con,$sql);
-	//$row = mysqli_fetch_assoc($result);
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-   // $active = $row['active'];
 
 	$count = mysqli_num_rows($result);
  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
+  
+  //authentication is suucessfule
+  //pass userName as a varible to the adminAccount.php
   if($count == 1){
 	  session_start();
-	  //login as admin
-	  if( $row["adminFlag"]==1){		  
-		$_SESSION['admName'] = $userName;
-		header("Location:adminPage.php");
+	  $_SESSION['admName'] = $userName;	  
+		header("Location:adminAccount.php");
 		die();
-	  }
-	  //else login as manager
-	  else{
-		  $_SESSION['admName'] = $userName;
-		  header("Location:manPage.php");
-		  die();
-	  }
 	 }
+	 
+//authentication faild
   else{ 
 	echo"<p align='center' style='color:red'>Your Login Name or Password is invalid</p>";
   }

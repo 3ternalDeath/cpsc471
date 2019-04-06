@@ -53,6 +53,7 @@
 <a href="register.php">Need an account?</a>
 
 <?php
+//run only if user clicked login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo "hi";
 	
@@ -68,22 +69,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 
+//authenticate user
+//store username and password in row if authentication is suucessfule
 	$sql =  "SELECT userName, passwd FROM Customer WHERE userName = '$userName' and passwd = '$passwd'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-   // $active = $row['active'];
-
 	$count = mysqli_num_rows($result);
+	
  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
   
+ //authentication is suucessfule
   if($count == 1){
 	  mysqli_close($con);
 	  header("Location:index.php");
 	  die();
 	 }
+//authentication faild
   else{ 
 	echo"<p align='center' style='color:red'>Your Login Name or Password is invalid</p>";
 	mysqli_close($con);

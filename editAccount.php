@@ -1,5 +1,9 @@
  <?php
- include("adminPage.php");
+ //this page is used for editing account information for users
+  //username is passed as parameter
+session_start();
+$username = $_SESSION['admName'];
+
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
 
@@ -8,20 +12,34 @@
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-
-	$sql =  "SELECT name, phoneNumber, passwd FROM OverSeer WHERE userName = '$username'";
+//get account detail 
+	$sql =  "SELECT name, phoneNumber, passwd, adminFlag FROM OverSeer WHERE userName = '$username'";
+	
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
+	
+//if the account holder is manager, then include manPage.php (manager account setting)
+//else display admin setting	
+	if( $row["adminFlag"]==0){
+		  include("manPage.php");
+		  }
+	  else{
+		  include("adminPage.php");
+		  }
+	
  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
-  
+ 
+//update user account 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
 	$passwd = $_POST["password"];
+
+//restore the original setting if the name is null	
 	if($name==""){
 		$name = $row["name"];
 		$phoneNumber = $row["phoneNumber"];
@@ -34,16 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
   die('Error: ' . mysqli_error($con));
   }
-  
+
+//update is successful  
   if($count == 1){
 	  mysqli_close($con);
 	  header("Location:adminAccount.php");
 	  die();
 	 }
-  else{ 
-	echo"<p align='center' style='color:red'>Your Login Name or Password is invalid</p>";
 	mysqli_close($con);
-  }
+
 	}
 ?>
 <html>
@@ -58,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="container">
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+
 	<h1><?php echo $username;?></h1><br/>
 	<label>Update name: </label><br/>
     <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>

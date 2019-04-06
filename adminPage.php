@@ -1,5 +1,9 @@
 <?php
-session_start();
+//this page contents admin account setting
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 $username = $_SESSION['admName'];
 ?>
 <!DOCTYPE html>

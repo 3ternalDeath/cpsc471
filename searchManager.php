@@ -13,6 +13,8 @@
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
 	<h1>modify search</h1><br/>
     Username :<input type="text" name="username"/><br/><br/>
+	name :<input type="text" name="name"/><br/><br/>
+	phoneNumber :<input type="text" name="phoneNumber"/><br/><br/>
    <input type="submit" value="search"/>
 </form>
  </div>
@@ -23,6 +25,8 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
 	$userName = $_POST["username"];
+	$name = $_POST["name"];
+	$phoneNumber = $_POST["phoneNumber"];
 	$admFlag=false;
 	echo "<a href='register.php'>Need an account?</a>";
 
@@ -35,15 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-  $sql = "SELECT username From OverSeer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag'";
+  $sql = "SELECT username From OverSeer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";
   $result = mysqli_query($con,$sql);
-	
+
 	if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
         echo "<p align='center' style='color:blue'>".$row["username"]."</p>";
     }
-} else {
+	} 
+else {
     echo"<p align='center' style='color:red'>no match find</p>";
 }
 
