@@ -1,21 +1,25 @@
 <html>
-	<style>		
-		form {
-			padding: 100px 20px;
-			position: absolute;
-			left: 600px;
-			front-size: 30px;}		
-			
-		
-	</style>
 <body>
 <div class="container">
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-	<h1>modify search</h1><br/>
-    Username :<input type="text" name="username"/><br/><br/>
-	name :<input type="text" name="name"/><br/><br/>
-	phoneNumber :<input type="text" name="phoneNumber"/><br/><br/>
+	<div style="padding: 30px 20px;
+			position: absolute;
+			left: 400px;
+			front-size: 30px;">
+	<h1>modify search</h1>
+	<label>Username :</label><br/>
+    <input type="text" name="username"/><br/><br/>
+	<label>name :</label><br/>
+    <input type="text" name="name"/><br/><br/>
+	<label>phoneNumber :</label><br/>
+	<input type="text" name="phoneNumber"/><br/><br/>	
+	</div>
+
+	<div style="padding: 300px 20px;
+			position: absolute;
+			left: 400px;">
    <input type="submit" value="search"/>
+   </div>
 </form>
  </div>
  
@@ -28,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
 	$admFlag=false;
-	echo "<a href='register.php'>Need an account?</a>";
 
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
@@ -44,8 +47,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if (mysqli_num_rows($result) > 0) {
     // output data of each row
+	echo '<div style="
+  width: 300px;
+  height: 300px;
+  border: 5px solid green;
+  padding: 10px;
+  margin: 20px;
+  opacity: 1;
+  position: absolute;
+  top: 50px;
+			left: 800px;">';
+ 
+	
+	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
-        echo "<p align='center' style='color:blue'>".$row["username"]."</p>";
+		echo '<div style="padding: 20px 0px" >';
+        echo "<a href='searchManagerResult.php?username=".$row["username"]."'>".$row["username"]."</a>";
     }
 	} 
 else {
