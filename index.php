@@ -93,13 +93,9 @@
 </div>
 
 <div>
-	<form action="loginPage.php" method="post">
-	   <input type="submit" name= "login" value="login">
-	</form>
-
-	<form action="register.php" method="post">
-	    <input type="submit" name= "register" value="register" />
-	</form>
+	<a href="loginPage.php">Login as Customer<a>
+	<a href="EmployeeLogin.php">Login as Employee</a>
+	<a href="register.php">Need an account?</a>
 </div>
 
 <div class="footer">
