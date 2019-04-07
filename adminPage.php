@@ -52,7 +52,7 @@ body {
   <li><a class="active" href="adminAccount.php">Home</a></li>
   <li><a href="searchManager.php">Search Manager</a></li>
   <li><a href="addManager.php">Add Manager</a></li>
-  <li><a href="#Search Movie">Search Movie</a></li>
+  <li><a href="searchMovie.php">Search Movie</a></li>
   <li><a href="addMovie.php">Add Movie</a></li>
   <li><a href="editAccount.php">Manage Account</a></li>
   <li><a href="index.php">Logout</a></li>

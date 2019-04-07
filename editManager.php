@@ -48,7 +48,8 @@ if (isset($_GET['holdername'])) {
     <input type="text" name="phoneNumber" value=<?php echo $row["phoneNumber"];?>><br/><br/>
 	<label>Position : Manager</label><br/><br/>
 	<input type="hidden" name="holdername" value=<?php echo $holdername;?>>
-
+	<input type="hidden" name="tableName" value="OverSeer">
+	
    <input type="submit" value="update"/>
 </form>
  </div>
@@ -58,8 +59,11 @@ if (isset($_GET['holdername'])) {
 			position: absolute;
 			left: 100px;">
 
-<form method="post" action="deleteManager.php">
+<form method="post" action="delete.php">
     <input type="hidden" name="holdername" value=<?php echo $holdername;?>>
+	 <input type="hidden" name="tableName" value="OverSeer">
+	 <input type="hidden" name="columnName" value="username">
+	 <input type="hidden" name="returnLocation" value="searchManager.php">
     <input type="submit" value="delete">
 </form>
 </div>

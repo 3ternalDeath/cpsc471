@@ -6,16 +6,18 @@
 			position: absolute;
 			left: 400px;
 			front-size: 30px;">
-	<h1>Modify Search</h1>
-	<label>Username :</label><br/>
-    <input type="text" name="username"/><br/><br/>
-	<label>name :</label><br/>
+	<h1>Modify Search search</h1>
+	<label>IMDBID :</label><br/>
+    <input type="text" name="IMDBID"/><br/><br/>
+	<label>Movie Name :</label><br/>
     <input type="text" name="name"/><br/><br/>
-	<label>phoneNumber :</label><br/>
-	<input type="text" name="phoneNumber"/><br/><br/>	
+	<label>Run Time:</label><br/>
+	<input type="time" name="runTime" value="time"/><br/><br/>
+	<label>Release Date :</label><br/>
+    <input type="date" name="releaseDate" value= "date"/><br/><br/>
 	</div>
 
-	<div style="padding: 300px 20px;
+	<div style="padding: 350px 20px;
 			position: absolute;
 			left: 400px;">
    <input type="submit" value="search"/>
@@ -28,10 +30,10 @@
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
-	$userName = $_POST["username"];
+	$IMDBID = $_POST["IMDBID"];
 	$name = $_POST["name"];
-	$phoneNumber = $_POST["phoneNumber"];
-	$admFlag=false;
+	$runTime = $_POST["runTime"];
+	$releaseDate = $_POST["releaseDate"];
 
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
@@ -42,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-  $sql = "SELECT username From OverSeer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";
+  $sql = "SELECT IMDBID, name From movie  WHERE IMDBID LIKE '%$IMDBID%' AND name LIKE '%$name%' AND runTime LIKE '%$runTime%' AND releaseDate LIKE '%$releaseDate%'";
   $result = mysqli_query($con,$sql);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -62,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
 		echo '<div style="padding: 20px 0px" >';
-        echo "<a href='editManager.php?holdername=".$row["username"]."'>".$row["username"]."</a>";
+        echo "<a href='editMovie.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";
     }
 	} 
 else {
