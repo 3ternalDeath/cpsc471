@@ -2,7 +2,7 @@
 <html>
 	<style>		
 		form {
-			padding: 100px 20px;
+			padding: 60px 20px;
 			position: absolute;
 			left: 600px;
 			front-size: 30px;}		
@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if($passwd==""){echo"<p align='center' style='color:red'>password field cannot be empty</p>";}
 		if($name==""){echo"<p align='center' style='color:red'>name field cannot be empty</p>";}
 		if($phoneNumber==""){echo"<p align='center' style='color:red'>phoneNumber field cannot be empty</p>";}
+		else if(strlen($phoneNumber)<10){echo"<p align='center' style='color:red'>must be a valid phoneNumber</p>";}
 		else{
 		echo"<p align='center' style='color:red'>username is already registered</p>";}
 		die();

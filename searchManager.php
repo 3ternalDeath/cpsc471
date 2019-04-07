@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // output data of each row
 	echo '<div style="
   width: 300px;
-  height: 300px;
-  border: 5px solid green;
+  height: 500px;
+  background: rgba(236, 255, 179, 0.3);
   padding: 10px;
   margin: 20px;
   opacity: 1;
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
 		echo '<div style="padding: 20px 0px" >';
-        echo "<a href='searchManagerResult.php?username=".$row["username"]."'>".$row["username"]."</a>";
+        echo "<a href='editManager.php?holdername=".$row["username"]."'>".$row["username"]."</a>";
     }
 	} 
 else {
