@@ -77,17 +77,16 @@
 
 <div>
 	<ul class="topmenu">
-		<li><a href="#showTime" class="active">Show Time</a></li>
+		<li><a href="searchShowTime.php" class="active">Show Time</a></li>
 		<li class="dropdown">
 			<a href="javascript:void(0)" class="dropbtn">Movie</a>
 			<div class="dropdown-content">
-				<a href="#">Moive</a>
-				<a href="#">Genre</a>
-				<a href="#">Actor</a>
+				<a href="searchByMovieName.php">Movie</a>
+				<a href="searchByGenre.php">Genre</a>
+				<a href="searchByActor.php">Actor</a>
 			</div>
 		</li>
-		<li><a href="#food">Food</a></li>
-		<li><a href="#about">About</a></li>
+		<li><a href="searchFood.php">Food</a></li>
 		<li style="float:right"><a href="#login">Login</a></li>
 	</ul>
 </div>
@@ -98,9 +97,26 @@
 	<a href="register.php">Need an account?</a>
 </div>
 
+
+<div class="container">
+	<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+		<div>
+			<h1>Tickets</h1>
+			<label>Select Location :</label><br/>
+		    <input type="text" name="cinemaAddr"/><br/><br/>
+			<label>Select Movie :</label><br/>
+		    <input type="text" name="name"/><br/><br/>
+			<label>Select Date/Time :</label><br/>
+			<input type="text" name="DTime"/><br/><br/>
+		</div>
+
+</div>
+
 <div class="footer">
 	<p>Hi, my name is cinema</p><br>
 </div>
+
+
 
 </body>
 </html>
