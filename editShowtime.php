@@ -1,0 +1,81 @@
+<?php
+ include("manPage.php");
+if (isset($_GET['MovieIMDBID'])) {
+	$MovieIMDBID =  $_GET['MovieIMDBID'];
+ }
+// Create connection
+	$con=mysqli_connect("localhost","root","","cinemaDB");
+
+// Check connection
+	if (mysqli_connect_errno($con))
+	{
+		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+//get account detail 
+	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$MovieIMDBID'";
+	$result = mysqli_query($con,$sql);
+	$row = mysqli_fetch_assoc($result);
+	$count = mysqli_num_rows($result);
+	if($row["IMDB"]==""){
+		$IMDB=$MovieIMDBID;
+		header("Location:addShowTime.php?IMDB=".$IMDB);
+		exit();
+	}
+		
+ if (!mysqli_query($con,$sql))
+  {
+  die('Error: ' . mysqli_error($con));
+  }
+
+?>
+<html>
+<style>		
+		form {
+			padding: 60px 20px;
+			position: absolute;
+			left: 600px;
+			front-size: 30px;}		
+			
+		
+	</style>
+<body>
+
+<form method="post" action="editUpdate.php">
+		
+	<label>IMDB : <?php echo $MovieIMDBID;?></label><br/><br/>
+	<label>Time: </label><br/>
+    <input type="text" name="DTime" value=<?php echo $row["DTime"];?>><br/><br/>
+	<label>Price:</label><br/>
+	<input type="text" name="price" value=<?php echo $row["price"];?>><br/><br/>
+	<label>Cinema Address :</label><br/>
+    <input type="text" name="cinemaAddr" value=<?php echo $row["cinemaAddr"];?>><br/><br/>
+	<label>Room Number:</label><br/>
+    <input type="text" name="roomNum" value=<?php echo $row["roomNum"];?>><br/><br/>
+		
+	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
+	<input type="hidden" name="tableName" value="ShowTime">
+	
+
+   <input type="submit" value="update"/>
+
+</form>
+
+<div style="padding: 265px 20px;
+			position: absolute;
+			left: 100px;">
+
+<form method="post" action="delete.php">
+    <input type="hidden" name="holdername" value=<?php echo $MovieIMDBID;?>>
+	 <input type="hidden" name="tableName" value="ShowTime">
+	 <input type="hidden" name="columnName" value="IMDB">
+	 <input type="hidden" name="returnLocation" value="searchMovie.php">
+    <input type="submit" value="delete">
+</form>
+</div>
+ 
+
+
+ 
+
+</body>
+</html>

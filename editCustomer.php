@@ -1,5 +1,5 @@
 <?php
- include("adminPage.php");
+ include("manPage.php");
 if (isset($_GET['holdername'])) {
 	$holdername =  $_GET['holdername'];
  }
@@ -13,7 +13,7 @@ if (isset($_GET['holdername'])) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 //get account detail 
-	$sql =  "SELECT name, phoneNumber, passwd, username FROM OverSeer WHERE userName = '$holdername'";
+	$sql =  "SELECT name, phoneNumber, passwd, username, age FROM Customer WHERE userName = '$holdername'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
@@ -44,25 +44,27 @@ if (isset($_GET['holdername'])) {
     <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>
 	<label>Password :</label><br/>
     <input type="password" name="password" value=<?php echo $row["passwd"];?>><br/><br/>
+	<label>age: </label><br/>
+    <input type="text" name="age" value=<?php echo $row["age"];?>><br/><br/>
 	<label>PhoneNumber :</label><br/>
     <input type="text" name="phoneNumber" value=<?php echo $row["phoneNumber"];?>><br/><br/>
-	<label>Position : Manager</label><br/><br/>
+	<label>Position : Customer</label><br/><br/>
 	<input type="hidden" name="holdername" value=<?php echo $holdername;?>>
-	<input type="hidden" name="tableName" value="OverSeer">
+	<input type="hidden" name="tableName" value="Customer">
 	
    <input type="submit" value="update"/>
 </form>
  </div>
  
 
-<div style="padding: 243px 20px;
+<div style="padding: 300px 20px;
 			position: absolute;
 			left: 100px;">
 
 <form method="post" action="delete.php">
     <input type="hidden" name="holdername" value=<?php echo $holdername;?>>
-	 <input type="hidden" name="tableName" value="OverSeer">
-	 <input type="hidden" name="columnName" value="username">
+	 <input type="hidden" name="tableName" value="Customer">
+	 <input type="hidden" name="columnName" value="userName">
 	 <input type="hidden" name="returnLocation" value="searchPeople.php">
     <input type="submit" value="delete">
 </form>

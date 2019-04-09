@@ -13,11 +13,11 @@
 	<label>Movie Name :</label><br/>
     <input type="text" name="movieName"/><br/><br/>
 	<label>Run Time:</label><br/>
-	<input type="time" name="runTime" value="time"/><br/><br/>
+	<input type="text" name="runTime"/><br/><br/>
 	<label>Producer :</label><br/>
     <input type="text" name="producer"/><br/><br/>
 	<label>Synopsis:</label><br/>
-    <input type="text" name="synopsis" style="height:100px" /><br/><br/>
+    <textarea name="synopsis" rows="5" cols="30"></textarea><br/><br/>
 	<label>Director :</label><br/>
     <input type="text" name="director"/><br/><br/>
 	
@@ -30,7 +30,7 @@
 	<label>Format:</label><br>
 	<input type="text" name="format"/><br/><br/>
 	<label>Release Date :</label><br/>
-    <input type="date" name="releaseDate" value= "date"/><br/><br/>
+    <input type="date" name="releaseDate" /><br/><br/>
 	<label>Writers :</label><br/>
     <input type="text" name="writer"/><br/><br/>
    

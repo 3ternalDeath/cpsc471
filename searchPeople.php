@@ -24,25 +24,21 @@
  </div>
  
  <?php
- include("adminPage.php");
+ include("identify.php");
+
+ if( $flag==0){
+ include("manPage.php");}
+ else{include("adminPage.php");}
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	//echo"h";
 	$userName = $_POST["username"];
 	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
 	$admFlag=false;
 
-// Create connection
-	$con=mysqli_connect("localhost","root","","cinemaDB");
-
-// Check connection
-	if (mysqli_connect_errno($con))
-  {
-	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-
-  $sql = "SELECT username From OverSeer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";
+if($flag==0){$sql = "SELECT username From Customer  WHERE userName LIKE '%$userName%' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";}
+else{
+$sql = "SELECT username From OverSeer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";}
   $result = mysqli_query($con,$sql);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -62,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
 		echo '<div style="padding: 20px 0px" >';
-        echo "<a href='editManager.php?holdername=".$row["username"]."'>".$row["username"]."</a>";
+		if($flag==1){
+        echo "<a href='editManager.php?holdername=".$row["username"]."'>".$row["username"]."</a>";}
+		else{
+			echo "<a href='editCustomer.php?holdername=".$row["username"]."'>".$row["username"]."</a>";}
     }
 	} 
 else {

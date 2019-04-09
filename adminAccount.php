@@ -21,27 +21,10 @@
  <?php 
  //this file display account detail for user and also act as an default page
  //username is passed as parameter
-session_start();
-$username = $_SESSION['admName'];
-
-// Create connection
-	$con=mysqli_connect("localhost","root","","cinemaDB");
-
-// Check connection
-	if (mysqli_connect_errno($con))
-	{
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
-
-//get account detail 
-	$sql =  "SELECT name, phoneNumber,adminFlag FROM OverSeer WHERE userName = '$username'";
-	$result = mysqli_query($con,$sql);
-	$row = mysqli_fetch_assoc($result);
-	$count = mysqli_num_rows($result);
- if (!mysqli_query($con,$sql))
-  {
-  die('Error: ' . mysqli_error($con));
-  }
+ include("identify.php");
+ if( $flag==0){
+ include("manPage.php");}
+ else{include("adminPage.php");}
 //display account detail  
   if($count == 1){
 	  echo '<div style="position:absolute; top:100px; left: 600px"> username:  '.$username.' </div>';
@@ -49,7 +32,7 @@ $username = $_SESSION['admName'];
 	  echo '<div style="position:absolute; top:160px; left: 600px"> phoneNumber: '.$row["phoneNumber"].' </div>';
 	  
 //if the account holder is manager, then include manPage.php (manager account setting)
-	  if( $row["adminFlag"]==0){
+	  if( $flag==0){
 		  include("manPage.php");
 		  echo '<div style="position:absolute; top:190px; left: 600px"> position: manager </div>';}
 		  

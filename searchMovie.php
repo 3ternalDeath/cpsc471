@@ -12,9 +12,9 @@
 	<label>Movie Name :</label><br/>
     <input type="text" name="name"/><br/><br/>
 	<label>Run Time:</label><br/>
-	<input type="time" name="runTime" value="time"/><br/><br/>
+	<input type="text" name="runTime"/><br/><br/>
 	<label>Release Date :</label><br/>
-    <input type="date" name="releaseDate" value= "date"/><br/><br/>
+    <input type="date" name="releaseDate" /><br/><br/>
 	</div>
 
 	<div style="padding: 350px 20px;
@@ -26,7 +26,11 @@
  </div>
  
  <?php
- include("adminPage.php");
+ include("identify.php");
+
+ if( $flag==0){
+ include("manPage.php");}
+ else{include("adminPage.php");}
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
@@ -35,14 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$runTime = $_POST["runTime"];
 	$releaseDate = $_POST["releaseDate"];
 
-// Create connection
-	$con=mysqli_connect("localhost","root","","cinemaDB");
-
-// Check connection
-	if (mysqli_connect_errno($con))
-  {
-	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
 
   $sql = "SELECT IMDBID, name From movie  WHERE IMDBID LIKE '%$IMDBID%' AND name LIKE '%$name%' AND runTime LIKE '%$runTime%' AND releaseDate LIKE '%$releaseDate%'";
   $result = mysqli_query($con,$sql);
@@ -64,7 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
 		echo '<div style="padding: 20px 0px" >';
-        echo "<a href='editMovie.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";
+		if($flag==1){
+        echo "<a href='editMovie.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
+		else{
+			echo "<a href='editShowtime.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
     }
 	} 
 else {
