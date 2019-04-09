@@ -2,6 +2,7 @@
  include("manPage.php");
 if (isset($_GET['MovieIMDBID'])) {
 	$MovieIMDBID =  $_GET['MovieIMDBID'];
+	$DTime=$_GET['DTime'];
  }
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
@@ -12,15 +13,10 @@ if (isset($_GET['MovieIMDBID'])) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 //get account detail 
-	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$MovieIMDBID'";
+	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$MovieIMDBID' AND DTime='$DTime'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
-	if($row["IMDB"]==""){
-		$IMDB=$MovieIMDBID;
-		header("Location:addShowTime.php?IMDB=".$IMDB);
-		exit();
-	}
 		
  if (!mysqli_query($con,$sql))
   {
@@ -66,11 +62,19 @@ if (isset($_GET['MovieIMDBID'])) {
 
 <form method="post" action="delete.php">
     <input type="hidden" name="holdername" value=<?php echo $MovieIMDBID;?>>
+	 <input type="hidden" name="holdername2" value=<?php echo $DTime;?>>
 	 <input type="hidden" name="tableName" value="ShowTime">
 	 <input type="hidden" name="columnName" value="IMDB">
-	 <input type="hidden" name="returnLocation" value="searchMovie.php">
+	 <input type="hidden" name="columnName2" value="DTime">
+	 <input type="hidden" name="returnLocation" value="searchShowTime.php">
     <input type="submit" value="delete">
 </form>
+</div>
+
+<div style="padding: 400px 20px;
+			position: absolute;
+			left: 600px;">
+
 </div>
  
 

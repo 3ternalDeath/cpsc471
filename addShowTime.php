@@ -2,8 +2,10 @@
  <?php
  include("manPage.php");
  if($_GET){
-        $IMDB= $_GET['IMDB'];     
+       $MovieIMDBID =  $_GET['MovieIMDBID'];    
+		$IMDB=$MovieIMDBID;
     }
+	else{$IMDB= $_POST["IMDB"];}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$IMDB= $_POST["IMDB"];
 	$DTime = $_POST["DTime"];
@@ -50,8 +52,8 @@ mysqli_close($con);}
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
 			
 	<label>IMDB : <?php echo $IMDB;?></label><br/><br/>
-	<label>Time: </label><br/>
-    <input type="text" name="DTime" value="0000-00-00"/><br/><br/>
+	<label>Date/Time: </label><br/>
+    <input type="text" name="DTime" value="0000-00-00 00:00:00"/><br/><br/>
 	<label>Price:</label><br/>
 	<input type="text" name="price"/><br/><br/>
 	<label>Cinema Address :</label><br/>

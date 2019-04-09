@@ -6,7 +6,7 @@
 			position: absolute;
 			left: 400px;
 			front-size: 30px;">
-	<h1>Modify Search search</h1>
+	<h1>Modify Search</h1>
 	<label>IMDBID :</label><br/>
     <input type="text" name="IMDBID"/><br/><br/>
 	<label>Movie Name :</label><br/>
@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if($flag==1){
         echo "<a href='editMovie.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
 		else{
-			echo "<a href='editShowtime.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
+			echo "<a href='addShowtime.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
     }
 	} 
 else {

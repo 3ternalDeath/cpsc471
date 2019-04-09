@@ -53,7 +53,8 @@ body {
 <ul>
   <li><a class="active" href="adminAccount.php">Home</a></li>
   <li><a href="searchPeople.php">Search Customer</a></li>
-  <li><a href="searchMovie.php">ShowTime</a></li>
+  <li><a href="searchShowTime.php">Search ShowTime</a></li>
+  <li><a href="searchMovie.php">Add ShowTime</a></li>
   <li><a href="editAccount.php">Manage Account</a></li>
   <li><a href="index.php">Logout</a></li>
 </ul>
