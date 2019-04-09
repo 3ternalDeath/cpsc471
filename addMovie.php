@@ -75,7 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  $sql = "INSERT INTO Genre (genre, IMDBID) VALUES ('". $genre ."','". $IMDBID ."')";
+  $sql = "INSERT INTO Genre (genre, movieIMDB) VALUES ('". $genre ."','". $IMDBID ."')";
+  if (!mysqli_query($con,$sql)){echo mysql_error();}
   $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer) 
   VALUES ('". $username ."','". $IMDBID ."','". $name ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."')";
 
