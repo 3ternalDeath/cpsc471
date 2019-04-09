@@ -2,11 +2,12 @@
 <html>
 <head>
 	<title>Cinema</title>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-		body {background-image: url("images.jpg");}
+		body {background-image: url("images.jpg");
+					font-family:Arial}
 
-		*{box-sizing: border-box;}
+		/*{box-sizing: border-box;}*/
 
 		.header, .footer{
 			background-color: #364247;
@@ -14,34 +15,41 @@
 			padding: 15px;
 		}
 
-		.topmenu{
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
+		.topnav{
 			overflow: hidden;
-			position: -webkit-sticky;
-			position: sticky;
-			top: 0;
 			background-color: #5bcfef;
 		}
 
-		.topmenu a, .dropbtn {
+		.topnav a {
 			float: left;
-			display: inline-block;
+			display: block;
 			color: white;
 			text-align: center;
 			padding: 15px 25px;
 			text-decoration: none;
+			font-size: 17px;
 		}
-
-		.topmenu a:hover, .dropdown:hover .dropbtn {background-color: #3d97af}
-
-		.active {background-color: #3d97af}
-
 
 		.dropdown {
-		  display: inline-block;
+			float: left;
+			overflow: hidden;
 		}
+
+		.dropdown .dropbtn {
+			font-size: 17px;
+		  cursor: pointer;
+		  border: none;
+			color: white;
+		  outline: none;
+		  padding: 15px 25px;
+		  background-color: inherit;
+			font-family: inherit;
+		  margin: 0;
+		}
+
+		.topnav a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {background-color: #3d97af}
+
+		.active {background-color: #3d97af}
 
 		.dropdown-content {
 		  display: none;
@@ -53,8 +61,9 @@
 		}
 
 		.dropdown-content a {
+			float: none;
 		  color: black;
-		  padding: 12px 16px;
+		  padding: 15px 25px;
 		  text-decoration: none;
 		  display: block;
 		  text-align: left;
@@ -62,8 +71,8 @@
 
 		.dropdown-content a:hover {background-color: #f1f1f1}
 
-		.dropdown:hover .dropdown-content {
-		  display: block;
+		.show {
+  		display: block;
 		}
 
 
@@ -95,19 +104,20 @@ window.onclick = function(event) {
 	<h1>Fancy Cinema</h1><br>
 </div>
 
-	<div class="topmenu" id="myTopmenu">
-		<a href="searchShowTime.php">Show Time</a>
-		<div class="dropdown">
-			<a href="javascript:void(0)" onclick="myFunction()" class="dropbtn">Movie</a>
-			<div class="dropdown-content" id="myDropdown">
-				<a href="searchByMovieName.php">Movie</a>
-				<a href="searchByGenre.php">Genre</a>
-				<a href="searchByActor.php">Actor</a>
-			</div>
+<div class="topnav">
+	<a href="searchShowTime.php">Show Time</a>
+	<div class="dropdown">
+		<button class="dropbtn" onclick="myFunction()">Movie
+			<i class="fa fa-caret-down"></i></button>
+		<div class="dropdown-content" id="myDropdown">
+			<a href="searchByMovieName.php">Movie</a>
+			<a href="searchByGenre.php">Genre</a>
+			<a href="searchByActor.php">Actor</a>
 		</div>
-		<a href="searchFood.php">Food</a>
-		<li style="float:right"><a href="loginPage.php">Login as Customer</a></li>
-		<li style="float:right"><a href="EmployeeLogin.php">Login as Employee</a></li>
+	</div>
+	<a href="searchFood.php">Food</a>
+	<a style="float:right" href="loginPage.php">Login as Customer</a>
+	<a style="float:right" href="EmployeeLogin.php">Login as Employee</a>
 </div>
 
 
@@ -149,29 +159,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  $sql = "SELECT cinemaAddr, DTime From ShowTime AND name From Movie";
  $result = mysqli_query($con,$sql);
 
- if (mysqli_num_rows($result) > 0) {
-	 // output data of each row
- echo '<div style="
- width: 300px;
- height: 500px;
- background: rgba(236, 255, 179, 0.3);
- padding: 10px;
- margin: 20px;
- opacity: 1;
- position: absolute;
- top: 50px;
-		 left: 800px;">';
-
-
- echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
-	 while($row = mysqli_fetch_assoc($result)) {
-	 echo '<div style="padding: 20px 0px" >';
-			 echo "<a href='editManager.php?holdername=".$row["username"]."'>".$row["username"]."</a>";
-	 }
- }
-else {
-	 echo"<p align='center' style='color:red'>no match find</p>";
-}
 
 mysqli_close($con);}
 ?>
