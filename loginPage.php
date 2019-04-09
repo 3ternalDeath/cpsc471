@@ -2,20 +2,20 @@
 
 <html>
 <head>
-	<title>User Login</title>	
+	<title>User Login</title>
 	<style>
 		form{padding-top: 120px;
 			text-align: center;
 			front-size: 30px;}
-			
+
 		input[type=text]{width: 200px;
 			height: 40px;
 			front-size: 30px;}
-			
+
 		input[type=password]{width: 200px;
 			height: 40px;
 			front-size: 30px;}
-			
+
 		input[name=login]{
 			width: 150px;
 			position: absolute;
@@ -23,23 +23,23 @@
 			//padding:30px 16px;
 			top: 354px;
 			height: 20px;
-			front-size: 15px;}		
-			
+			front-size: 15px;}
+
 		a{
 			width: 150px;
 			position: absolute;
 			left:55%;
 			top: 354px;
 			height: 20px;
-			front-size: 15px;}	
-			
+			front-size: 15px;}
+
 		body {
   background-image: url("images.jpg");
-  
-} 
-			
+
+}
+
 	</style>
-	
+
 </head>
 <body>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
@@ -56,7 +56,7 @@
 //run only if user clicked login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo "hi";
-	
+
 	$userName = $_POST["username"];
 	$passwd = $_POST["password"];
 
@@ -71,24 +71,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 //authenticate user
 //store username and password in row if authentication is suucessfule
-	$sql =  "SELECT userName, passwd FROM Customer WHERE userName = '$userName' and passwd = '$passwd'";
-	$result = mysqli_query($con,$sql);
+	$prep = mysqli_prepare($con,"SELECT userName FROM Customer WHERE userName = ? and passwd = ?");
+	mysqli_stmt_bind_param($prep, "ss", $userName, $passwd);
+	mysqli_stmt_execute($prep);
+	$result = mysqli_stmt_get_result($prep);
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 	$count = mysqli_num_rows($result);
-	
- if (!mysqli_query($con,$sql))
+
+ if (!$result)
   {
   die('Error: ' . mysqli_error($con));
   }
-  
+
  //authentication is suucessfule
   if($count == 1){
 	  mysqli_close($con);
+		setcookie("Cust_User", $userName, time()+(86400 * 1), "/"); // 86400 = 1 day
 	  header("Location:index.php");
 	  die();
 	 }
 //authentication faild
-  else{ 
+  else{
 	echo"<p align='center' style='color:red'>Your Login Name or Password is invalid</p>";
 	mysqli_close($con);
   }
@@ -97,4 +100,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
  </body>
 </html>
-
