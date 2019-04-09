@@ -50,7 +50,7 @@ body {
 
 <ul>
   <li><a class="active" href="adminAccount.php">Home</a></li>
-  <li><a href="searchManager.php">Search Manager</a></li>
+  <li><a href="searchPeople.php">Search Manager</a></li>
   <li><a href="addManager.php">Add Manager</a></li>
   <li><a href="searchMovie.php">Search Movie</a></li>
   <li><a href="addMovie.php">Add Movie</a></li>

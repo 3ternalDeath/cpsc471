@@ -34,7 +34,7 @@
 		$name = $_POST["name"];
 		$phoneNumber = $_POST["phoneNumber"];
 		$passwd = $_POST["password"];
-		$returnLocation="searchManager.php";
+		$returnLocation="searchPeople.php";
 		
 		if($name=="" or $phoneNumber=="" or $passwd=="" or strlen($phoneNumber)<10){$flag=false;}
 		
@@ -45,8 +45,40 @@
 			}
 		}
 	}
-	if($tableName=="Customer"){}
-	if($tableName=="ShowTime"){}
+	if($tableName=="Customer"){
+		$holdername =  $_POST['holdername'];	
+		$name = $_POST["name"];
+		$phoneNumber = $_POST["phoneNumber"];
+		$passwd = $_POST["password"];
+		$age = $_POST["age"];
+		$returnLocation="searchPeople.php";
+		
+		if($name=="" or $phoneNumber=="" or $passwd=="" or $age=="" or strlen($phoneNumber)<10){$flag=false;}
+		
+		if($flag==true){
+		$sql = "UPDATE Customer SET passwd='".$passwd."', name='".$name."', phoneNumber='".$phoneNumber."', age='".$age."' WHERE userName = '$holdername'";
+		if (!mysqli_query($con,$sql)){	  
+			die('Error: ' . mysqli_error($con));
+			}
+		}
+	}
+	if($tableName=="ShowTime"){
+		$MovieIMDBID =  $_POST['MovieIMDBID'];	
+		$DTime = $_POST["DTime"];
+		$price = $_POST["price"];
+		$cinemaAddr = $_POST["cinemaAddr"];
+		$roomNum = $_POST["roomNum"];
+		$returnLocation="searchPeople.php";
+		
+		if($DTime=="" or $price==""){$flag=false;}
+		
+		if($flag==true){
+		$sql = "UPDATE ShowTime SET DTime='".$DTime."', price='".$price."', cinemaAddr='".$cinemaAddr."', roomNum='".$roomNum."' WHERE IMDB = '$MovieIMDBID'";
+		if (!mysqli_query($con,$sql)){	  
+			die('Error: ' . mysqli_error($con));
+			}
+		}
+	}
 	
 
 echo '<script language="javascript">';
