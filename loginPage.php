@@ -53,6 +53,8 @@
 <a href="register.php">Need an account?</a>
 
 <?php
+//remove cookie (just in case)
+setcookie("Cust_User", "", time()+(86400 * -1), "/");
 //run only if user clicked login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo "hi";
