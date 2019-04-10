@@ -41,31 +41,31 @@ if (isset($_GET['MovieIMDBID'])) {
 
 ?>
 <html>
+<style>
+	form{padding: 30px 20px;
+			position: absolute;
+			left: 400px;
+			front-size: 30px;}
+</style>
 <body>
 
 <form method="post" action="editUpdate.php">
 
-<div style="padding: 30px 20px;
-			position: absolute;
-			left: 400px;
-			front-size: 30px;">
-
 	<label>IMDBID : <?php echo $MovieIMDBID;?></label><br/><br/>
 	<label>Movie Name: </label><br/>
-    <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>
+    <input type="text" name="name" value=<?php echo $row["name"];?>></input><br/><br/>
 	<label>Run Time:</label><br/>
-	<input type="text" name="runTime" value=<?php echo $row["runTime"];?>><br/><br/>
+	<input type="text" name="runTime" value=<?php echo $row["runTime"];?>></input><br/><br/>
 	<label>Producer :</label><br/>
-    <input type="text" name="producer" value=<?php echo $row["producer"];?>><br/><br/>
+    <input type="text" name="producer" value=<?php echo $row["producer"];?>></input><br/><br/>
 	<label>Synopsis:</label><br/>
 	<textarea name="synopsis" rows="5" cols="30" value=<?php echo $row["synopsis"];?>></textarea><br/><br/>
 	<label>Director :</label><br/>
-    <input type="text" name="director" value=<?php echo $row["director"];?>><br/><br/>
-	</div>
-
-	<div style="padding: 67px 20px;
+    <input type="text" name="director" value=<?php echo $row["director"];?>></input><br/><br/>
+	
+	<div style="top: 70px;
 			position: absolute;
-			left: 700px;
+			left: 300px;
 			front-size: 30px;">
 
 	<label>Format:</label><br/>
@@ -81,18 +81,18 @@ if (isset($_GET['MovieIMDBID'])) {
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="Movie">
 
-   <div style="padding: 360px 20px;
+   <div style="top: 340px;
 			position: absolute;
-			left: 700px;">
+			left: 300px;">
    <input type="submit" value="update"/>
    </div>
 </form>
 
 
 
-<div style="padding: 360px 20px;
+<div style="padding: 310px 20px;
 			position: absolute;
-			left: 800px;">
+			left: 400px;">
 
 <form method="post" action="delete.php">
     <input type="hidden" name="holdername" value=<?php echo $MovieIMDBID;?>>
