@@ -88,8 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  $sql = "INSERT INTO Genre (genre, movieIMDB) VALUES ('". $genre ."','". $IMDBID ."')";
-  if (!mysqli_query($con,$sql)){echo mysql_error();}
+  
   $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer)
   VALUES ('". $username ."','". $IMDBID ."','". $name ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."')";
 
@@ -105,6 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die();
 	}
 	else{
+		 $sql = "INSERT INTO Genre (genre, movieIMDB) VALUES ('". $genre ."','". $IMDBID ."')";
+		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
 		echo"<p align='center' style='color:blue'>movie added!</p>";
 		die();
 	}

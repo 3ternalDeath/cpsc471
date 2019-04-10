@@ -36,6 +36,7 @@ if (isset($_GET['MovieIMDBID'])) {
   {
   die('Error: ' . mysqli_error($con));
   }
+  $DTime2=explode(" ",$row["DTime"]);
 
 ?>
 <html>
@@ -51,10 +52,12 @@ if (isset($_GET['MovieIMDBID'])) {
 <body>
 
 <form method="post" action="editUpdate.php">
-<?php printf $row;?>
+
 	<label>IMDB : <?php echo $MovieIMDBID;?></label><br/><br/>
+	<label>Date: </label><br/>
+    <input type="date" name="Date" value=<?php echo $DTime2[0];?>><br/><br/>
 	<label>Time: </label><br/>
-    <input type="text" name="DTime" value=<?php echo $row["DTime"];?>><br/><br/>
+    <input type="time" name="Time" value=<?php echo $DTime2[1];?>><br/><br/>
 	<label>Price:</label><br/>
 	<input type="text" name="price" value=<?php echo $row["price"];?>><br/><br/>
 	<label>Cinema Address :</label><br/>
@@ -70,13 +73,14 @@ if (isset($_GET['MovieIMDBID'])) {
 
 </form>
 
-<div style="padding: 265px 20px;
+<div style="padding: 328px 20px;
 			position: absolute;
 			left: 100px;">
 
 <form method="post" action="delete.php">
     <input type="hidden" name="holdername" value=<?php echo $MovieIMDBID;?>>
 	 <input type="hidden" name="holdername2" value=<?php echo $DTime;?>>
+	 <input type="hidden" name="holdername3" value=<?php echo $row["cinemaAddr"];?>>
 	 <input type="hidden" name="tableName" value="ShowTime">
 	 <input type="hidden" name="columnName" value="IMDB">
 	 <input type="hidden" name="columnName2" value="DTime">

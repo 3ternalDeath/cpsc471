@@ -22,7 +22,9 @@
 	else{$IMDB= $_POST["IMDB"];}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$IMDB= $_POST["IMDB"];
-	$DTime = $_POST["DTime"];
+	$Date=$_POST["Date"];
+	$Time=$_POST["Time"];
+	$DTime = $Date." ".$Time;
 	$price = $_POST["price"];
 	$cinemaAddr = $_POST["cinemaAddr"];
 	$roomNum = $_POST["roomNum"];
@@ -45,8 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die();
 	}
 	else{
-		echo"<p align='center' style='color:blue'>creation success!</p>";
-		header("Location:searchMovie.php");
+		$sql = "INSERT INTO PlayIn (movieIMDB, cinemaAddr) VALUES ('". $IMDB ."','".$cinemaAddr."')";
+		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
+		echo '<script language="javascript">';
+		echo 'alert("creation successful")';
+		echo '</script>';
+		header( "refresh:0;url=searchMovie.php" );
 		die();
 	}
 
@@ -66,8 +72,10 @@ mysqli_close($con);}
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
 	<label>IMDB : <?php echo $IMDB;?></label><br/><br/>
-	<label>Date/Time: </label><br/>
-    <input type="text" name="DTime" value="0000-00-00 00:00:00"/><br/><br/>
+	<label>Date: </label><br/>
+    <input type="date" name="Date"><br/><br/>
+	<label>Time: </label><br/>
+    <input type="time" name="Time"><br/><br/>
 	<label>Price:</label><br/>
 	<input type="text" name="price"/><br/><br/>
 	<label>Cinema Address :</label><br/>

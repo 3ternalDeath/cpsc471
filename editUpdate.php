@@ -64,7 +64,9 @@
 	}
 	if($tableName=="ShowTime"){
 		$MovieIMDBID =  $_POST['MovieIMDBID'];	
-		$DTime = $_POST["DTime"];
+		$Date=$_POST["Date"];
+		$Time=$_POST["Time"];
+		$DTime = $Date." ".$Time;
 		$price = $_POST["price"];
 		$cinemaAddr = $_POST["cinemaAddr"];
 		$roomNum = $_POST["roomNum"];
@@ -73,6 +75,8 @@
 		if($DTime=="" or $price==""){$flag=false;}
 		
 		if($flag==true){
+			$sql = "UPDATE PlayIn SET cinemaAddr='".$cinemaAddr."'WHERE MovieIMDB = '$MovieIMDBID'";
+			if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
 		$sql = "UPDATE ShowTime SET DTime='".$DTime."', price='".$price."', cinemaAddr='".$cinemaAddr."', roomNum='".$roomNum."' WHERE IMDB = '$MovieIMDBID'";
 		if (!mysqli_query($con,$sql)){	  
 			die('Error: ' . mysqli_error($con));
