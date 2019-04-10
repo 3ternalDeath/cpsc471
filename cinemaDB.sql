@@ -214,10 +214,21 @@ BEGIN
 
 DELIMITER ;
 
-/*ALTER TABLE OverSeer CHANGE `namee` `name` varchar(255);
-ALTER TABLE Customer CHANGE `namee` `name` varchar(255);
-ALTER TABLE Actor CHANGE `namee` `name` varchar(255);
-ALTER TABLE Cinema CHANGE `namee` `name` varchar(255);
-ALTER TABLE Food CHANGE `namee` `name` varchar(255);
-ALTER TABLE Movie CHANGE `namee` `name` varchar(255);
+/*
+SET GLOBAL innodb_file_per_table=1;
+ALTER TABLE OverSeer ENGINE=InnoDB;
+ALTER TABLE Customer ENGINE=InnoDB;
+ALTER TABLE Actor ENGINE=InnoDB;
+ALTER TABLE Cinema ENGINE=InnoDB;
+ALTER TABLE Food ENGINE=InnoDB;
+ALTER TABLE Movie ENGINE=InnoDB;
+ALTER TABLE Genre ENGINE=InnoDB;
+ALTER TABLE ActIn ENGINE=InnoDB;
+ALTER TABLE Movie ENGINE=InnoDB;
+ALTER TABLE PlayIn ENGINE=InnoDB;
+ALTER TABLE Offer ENGINE=InnoDB;
+ALTER TABLE Purchase ENGINE=InnoDB;
+ALTER TABLE Theater ENGINE=InnoDB;
+ALTER TABLE ShowTime ENGINE=InnoDB;
+ALTER TABLE Ticket ENGINE=InnoDB;
 */

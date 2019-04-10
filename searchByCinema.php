@@ -5,6 +5,8 @@ include("indexBase.php");
 
 <html>
 <body>
+<form method="get" action="searchByCinema.php">
+</form>
 
 <?php
 if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -24,20 +26,17 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $count = mysqli_num_rows($result);
     echo "<a>"."The movie is played at ". $count." locations: "."</a>";
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-      echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
+<<<<<<< HEAD
+      echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit' value='Select'></form>";
+=======
+      //echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'></form>";
+      echo "<a href='searchByMovieName.php?Addr=".$row["address"]."'>".$row["address"]."</a>";
+>>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
     }
   }
 
 }
 if(!isset($_GET['IMDB'])){
-  // Create connection
-  $con=mysqli_connect("localhost","root","","cinemaDB");
-
-  // Check connection
-  if (mysqli_connect_errno($con))
-  {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
   $prep = mysqli_prepare($con,"SELECT address FROM Cinema WHERE address <> ?");
   $filer = "";
   mysqli_stmt_bind_param($prep, "s", $filer);
@@ -46,7 +45,13 @@ if(!isset($_GET['IMDB'])){
   $count = mysqli_num_rows($result);
   echo "<h1>"."We have ". $count." locations: "."</h1>";
   while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-    echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
+<<<<<<< HEAD
+    echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit' value='Select'></form>";
+=======
+    echo '<div style="padding: 20px 0px" >';
+    //echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
+    echo "<a href='searchByMovieName.php?Addr=".$row["address"]."'>".$row["address"]."</a>";
+>>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
   }
 }
 ?>

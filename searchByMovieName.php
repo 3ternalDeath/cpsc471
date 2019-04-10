@@ -7,12 +7,16 @@ include("indexBase.php");
 <body>
 
 <form method="get" action="searchByMovieName.php">
+<<<<<<< HEAD
+  Movie Name: <input type="text" name="Mname" value="<?php if(isset($_GET['Mname'])){echo $_GET['Mname'];}?>">
+  <input type="submit" value='Search'>
+=======
   Movie Name: <input type="text" name="Mname" value="<?php if(isset($_GET['Mname'])){echo $_GET['Mname'];}?>"><br>
-  <input type="submit">
+  <input type="submit" value="Search">
+>>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
 </form>
 
 <?php
-if($_SERVER["REQUEST_METHOD"] == "GET"){
   // Create connection
   $con=mysqli_connect("localhost","root","","cinemaDB");
 
@@ -30,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $count = mysqli_num_rows($result);
     echo $count." results: ";
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-      echo "<form method='get' action='searchByCinema.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='submit'></form>";
+      echo "<form method='get' action='searchByCinema.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='submit' value='Select'></form>";
     }
   }
   else if (isset($_GET['Addr'])){
@@ -42,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $count = mysqli_num_rows($result);
     echo $count." movies play at this location: ";
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-      echo "<form method='get' action='viewShowTimes.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='submit'></form>";
+      echo "<form method='get' action='viewShowTimes.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='hidden' name='Addr' value='".$_GET['Addr']."'><input type='submit' value='Select'></form>";
     }
   }
   else if(isset($_GET['Genre'])){
@@ -54,11 +58,22 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $count = mysqli_num_rows($result);
     echo $count." movies have this genre: ";
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-      echo "<form method='get' action='searchByCinema.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='submit'></form>";
+      echo "<form method='get' action='searchByCinema.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='submit' value='Select'></form>";
+    }
+  }else{
+    $prep = mysqli_prepare($con,"SELECT IMDBID, name FROM Movie WHERE name LIKE ?");
+    $filer = "%";
+    mysqli_stmt_bind_param($prep, "s", $filer);
+    mysqli_stmt_execute($prep);
+    $result = mysqli_stmt_get_result($prep);
+    $count = mysqli_num_rows($result);
+    echo "<h1>We have ". $count." movies:</h1>";
+    while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+      echo "<form method='get' action='searchByCinema.php'>".$row['name']."  <input type='hidden' name='IMDB' value='".$row['IMDBID']."'><input type='submit' value='Select'></form>";
     }
   }
 
-}
+
 ?>
 
 </body>

@@ -39,7 +39,7 @@ include("indexBase.php");
   echo '<div style="padding: 80px 20px; font-size:130%;">';
     while($row = mysqli_fetch_array($result)){
       echo '<div style="padding: 20px 0px" >';
-    	echo "<a>".$row["name"]."---".$row["type"]."---".$row["size"]."---".$row["description"]."---".$row["price"]."<input type='submit'>"."</a>";
+    	echo "<a href='selectFood.php?food=".$row["name"]."'>".$row["name"]."  ".$row["size"]."</a>";
     }
 
   }
