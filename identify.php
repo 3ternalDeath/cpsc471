@@ -1,5 +1,7 @@
 <?php
+if(!isset($_SESSION)) {
  session_start();
+}
  $username = $_SESSION['admName'];
  // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");

@@ -1,9 +1,12 @@
 <?php
 //this page contents manager account setting
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+if(!isset($_SESSION)) {
+	session_start();
+}
+if(!isset($_SESSION['admName'])) {
+  header("Location:Forbidden.html");
+  die();
+}
 
 $username = $_SESSION['admName'];
 
@@ -40,12 +43,12 @@ li a:hover:not(.active) {
   color: white;
 }
 
-body { 
+body {
 
   background-image: url("image3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-} 
+}
 </style>
 
 <body>
@@ -56,7 +59,7 @@ body {
   <li><a href="searchShowTime.php">Search ShowTime</a></li>
   <li><a href="searchMovie.php">Add ShowTime</a></li>
   <li><a href="editAccount.php">Manage Account</a></li>
-  <li><a href="index.php">Logout</a></li>
+  <li><a href="EmployeeLogout.php">Logout</a></li>
 </ul>
 
 </body>

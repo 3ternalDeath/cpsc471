@@ -1,9 +1,12 @@
 <?php
-//this page contents admin account setting
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+  //this page contents admin account setting
+  if(!isset($_SESSION)) {
+  	session_start();
+  }
+  if(!isset($_SESSION['admName'])) {
+    header("Location:Forbidden.html");
+    die();
+  }
 $username = $_SESSION['admName'];
 ?>
 <!DOCTYPE html>
@@ -38,12 +41,12 @@ li a:hover:not(.active) {
   color: white;
 }
 
-body { 
+body {
 
   background-image: url("image3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-} 
+}
 </style>
 
 <body>
@@ -55,7 +58,7 @@ body {
   <li><a href="searchMovie.php">Search Movie</a></li>
   <li><a href="addMovie.php">Add Movie</a></li>
   <li><a href="editAccount.php">Manage Account</a></li>
-  <li><a href="index.php">Logout</a></li>
+  <li><a href="EmployeeLogout.php">Logout</a></li>
 </ul>
 
 </body>

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,8 +117,20 @@ window.onclick = function(event) {
 		</div>
 	</div>
 	<a href="searchFood.php">Food</a>
-	<a style="float:right" href="loginPage.php">Login as Customer</a>
-	<a style="float:right" href="EmployeeLogin.php">Login as Employee</a>
+	<?php
+		if(!isset($_COOKIE["Cust_User"])){
+			echo "<a style='float:right' href='loginPage.php'>Login as Customer</a>";
+		}else{
+			echo "<a style='float:right'>Loged in as ". $_COOKIE["Cust_User"]."</a>";
+		}
+
+		if(!isset($_SESSION['admName'])){
+			echo "<a style='float:right' href='EmployeeLogin.php'>Login as Employee</a>";
+		}else {
+			echo "<a style='float:right' href='adminAccount.php'>Loged in as an Employee</a>";
+		}
+
+	?>
 </div>
 
 
