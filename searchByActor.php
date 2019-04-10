@@ -7,16 +7,8 @@ include("indexBase.php");
 <body>
 
 <form method="get" action="searchByActor.php">
-<<<<<<< HEAD
-  Actor Name: <input type="text" name="Aname" value="<?php if(isset($_GET['Aname'])){echo $_GET['Aname'];}?>">
-  <input type="submit" value = "Search">
-=======
   Actor Name: <input type="text" name="Aname" value="<?php if(isset($_GET['Aname'])){echo $_GET['Aname'];}?>"><br>
   <input type="submit" value="Search">
-<<<<<<< HEAD
->>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
-=======
->>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
 </form>
 
 <?php

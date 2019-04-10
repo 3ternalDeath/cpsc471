@@ -7,14 +7,7 @@ include("indexBase.php");
 <body>
 
 <form method="get" action="searchByGenre.php">
-<<<<<<< HEAD
   Genre Name: <input type="text" name="Gname" value="<?php if(isset($_GET['Gname'])){echo $_GET['Gname'];}?>">
-=======
-  Genre Name: <input type="text" name="Gname" value="<?php if(isset($_GET['Gname'])){echo $_GET['Gname'];}?>"><br>
-<<<<<<< HEAD
->>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
-=======
->>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
   <input type="submit" value="Search">
 </form>
 
