@@ -1,9 +1,24 @@
 <?php
+
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	if(!isset($_SESSION['admName'])) {
+		header("Location:Forbidden.html");
+		die();
+	}
+	include("identify.php");
+	if( $flag==1){
+		header("Location:Forbidden.html");
+		die();
+	}
+
+
  include("manPage.php");
 if (isset($_GET['holdername'])) {
 	$holdername =  $_GET['holdername'];
  }
- 
+
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
 
@@ -12,14 +27,14 @@ if (isset($_GET['holdername'])) {
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-//get account detail 
+//get account detail
 	$sql =  "SELECT name, phoneNumber, passwd, username, age FROM Customer WHERE userName = '$holdername'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
-	
+
 //if the account holder is manager, then include manPage.php (manager account setting)
-//else display admin setting		
+//else display admin setting
  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
@@ -27,13 +42,13 @@ if (isset($_GET['holdername'])) {
 
 ?>
 <html>
-	<style>		
+	<style>
 		form {
 			padding: 80px 20px;
 			position: absolute;
 			left: 600px;
-			front-size: 30px;}		
-				
+			front-size: 30px;}
+
 	</style>
 <body>
 <div class="container">
@@ -51,11 +66,11 @@ if (isset($_GET['holdername'])) {
 	<label>Position : Customer</label><br/><br/>
 	<input type="hidden" name="holdername" value=<?php echo $holdername;?>>
 	<input type="hidden" name="tableName" value="Customer">
-	
+
    <input type="submit" value="update"/>
 </form>
  </div>
- 
+
 
 <div style="padding: 300px 20px;
 			position: absolute;
@@ -69,10 +84,10 @@ if (isset($_GET['holdername'])) {
     <input type="submit" value="delete">
 </form>
 </div>
- 
 
 
- 
+
+
 
 </body>
 </html>

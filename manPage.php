@@ -1,12 +1,16 @@
 <?php
-//this page contents manager account setting
-if(!isset($_SESSION)) {
-	session_start();
-}
-if(!isset($_SESSION['admName'])) {
-  header("Location:Forbidden.html");
-  die();
-}
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	if(!isset($_SESSION['admName'])) {
+		header("Location:Forbidden.html");
+		die();
+	}
+	include("identify.php");
+	if( $flag==0){
+		header("Location:Forbidden.html");
+		die();
+	}
 
 $username = $_SESSION['admName'];
 

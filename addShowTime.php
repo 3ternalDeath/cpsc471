@@ -1,8 +1,22 @@
+<?php
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	if(!isset($_SESSION['admName'])) {
+		header("Location:Forbidden.html");
+		die();
+	}
+	include("identify.php");
+	if( $flag==1){
+		header("Location:Forbidden.html");
+		die();
+	}
+?>
 <html>
  <?php
  include("manPage.php");
  if($_GET){
-       $MovieIMDBID =  $_GET['MovieIMDBID'];    
+       $MovieIMDBID =  $_GET['MovieIMDBID'];
 		$IMDB=$MovieIMDBID;
     }
 	else{$IMDB= $_POST["IMDB"];}
@@ -12,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$price = $_POST["price"];
 	$cinemaAddr = $_POST["cinemaAddr"];
 	$roomNum = $_POST["roomNum"];
-	
+
 	// Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
 
@@ -38,19 +52,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 mysqli_close($con);}
 ?>
-	<style>		
+	<style>
 		form {
 			padding: 60px 20px;
 			position: absolute;
 			left: 600px;
-			front-size: 30px;}		
-			
-		
+			front-size: 30px;}
+
+
 	</style>
 <body>
 <div class="container">
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-			
+
 	<label>IMDB : <?php echo $IMDB;?></label><br/><br/>
 	<label>Date/Time: </label><br/>
     <input type="text" name="DTime" value="0000-00-00 00:00:00"/><br/><br/>

@@ -1,4 +1,18 @@
 <?php
+
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	if(!isset($_SESSION['admName'])) {
+		header("Location:Forbidden.html");
+		die();
+	}
+	include("identify.php");
+	if( $flag==1){
+		header("Location:Forbidden.html");
+		die();
+	}
+
  include("manPage.php");
 if (isset($_GET['MovieIMDBID'])) {
 	$MovieIMDBID =  $_GET['MovieIMDBID'];

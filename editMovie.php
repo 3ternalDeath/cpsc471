@@ -1,9 +1,23 @@
 <?php
+
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	if(!isset($_SESSION['admName'])) {
+		header("Location:Forbidden.html");
+		die();
+	}
+	include("identify.php");
+	if( $flag==0){
+		header("Location:Forbidden.html");
+		die();
+	}
+
  include("adminPage.php");
 if (isset($_GET['MovieIMDBID'])) {
 	$MovieIMDBID =  $_GET['MovieIMDBID'];
  }
- 
+
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
 
@@ -12,14 +26,14 @@ if (isset($_GET['MovieIMDBID'])) {
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-//get account detail 
+//get account detail
 	$sql =  "SELECT * FROM Movie WHERE IMDBID = '$MovieIMDBID'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
-	
+
 //if the account holder is manager, then include manPage.php (manager account setting)
-//else display admin setting		
+//else display admin setting
  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
@@ -35,7 +49,7 @@ if (isset($_GET['MovieIMDBID'])) {
 			position: absolute;
 			left: 400px;
 			front-size: 30px;">
-			
+
 	<label>IMDBID : <?php echo $MovieIMDBID;?></label><br/><br/>
 	<label>Movie Name: </label><br/>
     <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>
@@ -53,18 +67,18 @@ if (isset($_GET['MovieIMDBID'])) {
 			position: absolute;
 			left: 600px;
 			front-size: 30px;">
-			
+
 	<label>Format:</label><br/>
 	<input type="text" name="format" value= <?php echo $row["FORMAT"];?>><br/><br/>
 	<label>Release Date :</label><br/>
     <input type="date" name="releaseDate" value=<?php echo $row["releaseDate"];?>><br/><br/>
 	<label>Writers :</label><br/>
-    <input type="text" name="writer" value=<?php echo $row["writer"];?>><br/><br/>  
+    <input type="text" name="writer" value=<?php echo $row["writer"];?>><br/><br/>
    </div>
-		
+
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="Movie">
-	
+
    <div style="padding: 300px 20px;
 			position: absolute;
 			left: 700px;">
@@ -72,7 +86,7 @@ if (isset($_GET['MovieIMDBID'])) {
    </div>
 </form>
  </div>
- 
+
 
 <div style="padding: 300px 20px;
 			position: absolute;
@@ -86,10 +100,10 @@ if (isset($_GET['MovieIMDBID'])) {
     <input type="submit" value="delete">
 </form>
 </div>
- 
 
 
- 
+
+
 
 </body>
 </html>

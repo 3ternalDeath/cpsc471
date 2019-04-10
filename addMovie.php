@@ -1,4 +1,17 @@
-
+<?php
+	if(!isset($_SESSION)) {
+		session_start();
+	}
+	if(!isset($_SESSION['admName'])) {
+		header("Location:Forbidden.html");
+		die();
+	}
+	include("identify.php");
+	if( $flag==0){
+		header("Location:Forbidden.html");
+		die();
+	}
+?>
 <html>
 <body>
 <div class="container">
@@ -20,13 +33,13 @@
     <textarea name="synopsis" rows="5" cols="30"></textarea><br/><br/>
 	<label>Director :</label><br/>
     <input type="text" name="director"/><br/><br/>
-	
+
 	</div>
 	<div style="padding: 110px 20px;
 			position: absolute;
 			left: 700px;
 			front-size: 30px;">
-			
+
 	<label>Format:</label><br>
 	<input type="text" name="format"/><br/><br/>
 	<label>Release Date :</label><br/>
@@ -42,7 +55,7 @@
 		<option value="comedy">comedy</option>
 		<option value="documentary">documentary</option>
 	</select> <br/><br/>
-   
+
    </div>
    <div style="padding: 380px 20px;
 			position: absolute;
@@ -51,7 +64,7 @@
    </div>
 </form>
  </div>
- 
+
  <?php
  include("adminPage.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -66,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$releaseDate = $_POST["releaseDate"];
 	$writer = $_POST["writer"];
 	$genre = $_POST["genre"];
-	
+
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
 
@@ -77,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   $sql = "INSERT INTO Genre (genre, movieIMDB) VALUES ('". $genre ."','". $IMDBID ."')";
   if (!mysqli_query($con,$sql)){echo mysql_error();}
-  $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer) 
+  $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer)
   VALUES ('". $username ."','". $IMDBID ."','". $name ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."')";
 
 	if (!mysqli_query($con,$sql))
@@ -88,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if($releaseDate==""){echo"<p align='center' style='color:red'>releaseDater field cannot be empty</p>";}
 		else{
 		echo"<p align='center' style='color:red'>IMDBID is already registered</p>";}
-		
+
 		die();
 	}
 	else{
