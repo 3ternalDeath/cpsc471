@@ -33,9 +33,10 @@ include("indexBase.php");
   if (mysqli_num_rows($result) > 0) {
 
   echo '<div style="padding: 130px 20px; font-size:130%;">';
-    while($row = mysqli_fetch_array($result))
-  	echo "<a>".$row["name"]."---".$row["type"]."---".$row["size"]."---".$row["description"]."---".$row["price"]."</a>";
-    
+    while($row = mysqli_fetch_array($result)){
+      echo '<div style="padding: 20px 0px" >';
+    	echo "<a>".$row["name"]."---".$row["type"]."---".$row["size"]."---".$row["description"]."---".$row["price"]."</a>";
+    }
 
   }
   else {
