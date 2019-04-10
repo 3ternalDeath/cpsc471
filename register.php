@@ -1,19 +1,19 @@
 <html>
-<title>Registration</title>	
+<title>Registration</title>
 	<style>
 		form {
 			padding-top: 80px;
 			text-align: center;
 			front-size: 30px;}
-			
+
 		label{
 			position: absolute;
 			left: 600px;
 			}
-			
+
 		body {
 			background-image: url("images.jpg");
-		} 
+		}
 	</style>
 <body>
 <div class="container">
@@ -35,7 +35,7 @@
    <input type="submit" value="create"/>
 </form>
  </div>
- 
+
  <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
@@ -57,8 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   $sql = "INSERT INTO Customer (userName, passwd, CCInfo, age, name, phoneNumber) VALUES ('". $userName ."','". $passwd ."','". $CCInfo ."','". $age ."','". $name ."','". $phoneNumber ."')";
+	$prep = mysqli_prepare($con, "INSERT INTO Customer (userName, passwd, CCInfo, age, name, phoneNumber) VALUES (?,?,?,?,?,?)");
+	mysqli_stmt_bind_param($prep, "ssssss", $userName, $passwd,$CCInfo,$age,$name,$phoneNumber);
 
-	if (!mysqli_query($con,$sql))
+	if (!mysqli_stmt_execute($prep))
 	{
 		if($userName==""){echo"<p align='center' style='color:red'>username field cannot be emplty</p>";}
 		if($passwd==""){echo"<p align='center' style='color:red'>password field cannot be empty</p>";}

@@ -6,38 +6,38 @@
 		form{padding-top: 120px;
 			text-align: center;
 			front-size: 30px;}
-			
+
 		label{
 			position: absolute;
 			left: 600px;
 			front-size: 30px;
 			}
-			
+
 		input[name=login]{
 			width: 150px;
 			position: absolute;
 			left: 530px;
 			top: 354px;
 			height: 20px;
-			front-size: 15px;}		
-			
+			front-size: 15px;}
+
 		input[name=return]{
 			width: 150px;
 			position: absolute;
 			left: 720px;
 			top: 354px;
 			height: 20px;
-			front-size: 15px;}	
-			
+			front-size: 15px;}
+
 		p{position: absolute;
 			left: 550px;
 			top: 374px;}
-			
+
 		body {
 			background-image: url("images.jpg");
-		} 			
+		}
 	</style>
-	
+
 </head>
 <body>
 
@@ -66,10 +66,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	
+
 //authenticate user
 	$sql =  "SELECT userName, passwd, adminFlag FROM OverSeer WHERE userName = '$userName' and passwd = '$passwd'";
-	$result = mysqli_query($con,$sql);
+	$prep = mysqli_prepare($con, "SELECT userName, passwd, adminFlag FROM OverSeer WHERE userName = ? and passwd = ?");
+	mysqli_stmt_bind_param($prep, "ss", $userName, $passwd);
+	mysqli_stmt_execute($prep);
+	$result = mysqli_stmt_get_result($prep);
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 	$count = mysqli_num_rows($result);
@@ -77,18 +80,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
   die('Error: ' . mysqli_error($con));
   }
-  
+
   //authentication is suucessfule
   //pass userName as a varible to the adminAccount.php
   if($count == 1){
 	  session_start();
-	  $_SESSION['admName'] = $userName;	  
+	  $_SESSION['admName'] = $userName;
 		header("Location:adminAccount.php");
 		die();
 	 }
-	 
+
 //authentication faild
-  else{ 
+  else{
 	echo"<p align='center' style='color:red'>Your Login Name or Password is invalid</p>";
   }
 
@@ -100,4 +103,3 @@ mysqli_close($con);
 </form>
  </body>
 </html>
-

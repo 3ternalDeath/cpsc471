@@ -121,6 +121,7 @@ window.onclick = function(event) {
 		if(!isset($_COOKIE["Cust_User"])){
 			echo "<a style='float:right' href='loginPage.php'>Login as Customer</a>";
 		}else{
+			echo "<a style='float:right' href='logout.php'>Log Out</a>";
 			echo "<a style='float:right'>Loged in as ". $_COOKIE["Cust_User"]."</a>";
 		}
 
