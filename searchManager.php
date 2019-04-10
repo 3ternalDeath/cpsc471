@@ -7,17 +7,15 @@
 			left: 400px;
 			front-size: 30px;">
 	<h1>Modify Search</h1>
-	<label>IMDBID :</label><br/>
-    <input type="text" name="IMDBID"/><br/><br/>
-	<label>Movie Name :</label><br/>
+	<label>Username :</label><br/>
+    <input type="text" name="username"/><br/><br/>
+	<label>name :</label><br/>
     <input type="text" name="name"/><br/><br/>
-	<label>Run Time:</label><br/>
-	<input type="text" name="runTime"/><br/><br/>
-	<label>Release Date :</label><br/>
-    <input type="date" name="releaseDate" /><br/><br/>
+	<label>phoneNumber :</label><br/>
+	<input type="text" name="phoneNumber"/><br/><br/>
 	</div>
 
-	<div style="padding: 350px 20px;
+	<div style="padding: 300px 20px;
 			position: absolute;
 			left: 400px;">
    <input type="submit" value="search"/>
@@ -26,21 +24,25 @@
  </div>
 
  <?php
- include("identify.php");
-
- if( $flag==0){
- include("manPage.php");}
- else{include("adminPage.php");}
+ include("adminPage.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//echo"h";
-	$IMDBID = $_POST["IMDBID"];
+	$userName = $_POST["username"];
 	$name = $_POST["name"];
-	$runTime = $_POST["runTime"];
-	$releaseDate = $_POST["releaseDate"];
+	$phoneNumber = $_POST["phoneNumber"];
+	$admFlag=false;
 
+// Create connection
+	$con=mysqli_connect("localhost","root","","cinemaDB");
 
-  $sql = "SELECT IMDBID, name From movie  WHERE IMDBID LIKE '%$IMDBID%' AND name LIKE '%$name%' AND runTime LIKE '%$runTime%' AND releaseDate LIKE '%$releaseDate%'";
+// Check connection
+	if (mysqli_connect_errno($con))
+  {
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+  $sql = "SELECT username From OverSeer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";
   $result = mysqli_query($con,$sql);
 
 	if (mysqli_num_rows($result) > 0) {
@@ -60,10 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
 		echo '<div style="padding: 20px 0px" >';
-		if($flag==1){
-        echo "<a href='editMovie.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
-		else{
-			echo "<a href='addShowtime.php?MovieIMDBID=".$row["IMDBID"]."'>".$row["IMDBID"]." --- ".$row["name"]."</a>";}
+        echo "<a href='editManager.php?holdername=".$row["username"]."'>".$row["username"]."</a>";
     }
 	}
 else {

@@ -12,8 +12,12 @@
 
 		.header{
 			background-color: #364247;
-			color: white;
 			padding: 15px;
+		}
+
+		.header a{
+			text-decoration: none;
+			color: white;
 		}
 
 		.topnav{
@@ -102,11 +106,11 @@ window.onclick = function(event) {
 <body>
 
 <div class="header">
-	<h1>Fancy Cinema</h1><br>
+	<a href="index.php"><h1>Fancy Cinema</h1></a>
 </div>
 
 <div class="topnav">
-	<a href="searchShowTime.php">Show Time</a>
+	<a href="searchByCinema.php">Show Time</a>
 	<div class="dropdown">
 		<button class="dropbtn" onclick="myFunction()">Movie
 			<i class="fa fa-caret-down"></i></button>
@@ -116,7 +120,6 @@ window.onclick = function(event) {
 			<a href="searchByActor.php">Actor</a>
 		</div>
 	</div>
-	<a href="searchByCinema.php">Locations</a>
 	<a href="searchFood.php">Food</a>
 	<?php
 		if(!isset($_COOKIE["Cust_User"])){

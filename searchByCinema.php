@@ -6,7 +6,6 @@ include("indexBase.php");
 <html>
 <body>
 
-
 <?php
 if($_SERVER["REQUEST_METHOD"] == "GET"){
   // Create connection
@@ -23,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     mysqli_stmt_execute($prep);
     $result = mysqli_stmt_get_result($prep);
     $count = mysqli_num_rows($result);
-    echo "The movie is played at ". $count." locations: ";
+    echo "<a>"."The movie is played at ". $count." locations: "."</a>";
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
       echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
     }
@@ -45,7 +44,7 @@ if(!isset($_GET['IMDB'])){
   mysqli_stmt_execute($prep);
   $result = mysqli_stmt_get_result($prep);
   $count = mysqli_num_rows($result);
-  echo "We have ". $count." locations: ";
+  echo "<h1>"."We have ". $count." locations: "."</h1>";
   while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
     echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
   }
