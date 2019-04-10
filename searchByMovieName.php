@@ -8,7 +8,7 @@ include("indexBase.php");
 
 <form method="get" action="searchByMovieName.php">
   Movie Name: <input type="text" name="Mname" value="<?php if(isset($_GET['Mname'])){echo $_GET['Mname'];}?>"><br>
-  <input type="submit">
+  <input type="submit" value="Search">
 </form>
 
 <?php

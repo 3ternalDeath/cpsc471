@@ -8,7 +8,7 @@ include("indexBase.php");
 
 <form method="get" action="searchByActor.php">
   Actor Name: <input type="text" name="Aname" value="<?php if(isset($_GET['Aname'])){echo $_GET['Aname'];}?>"><br>
-  <input type="submit">
+  <input type="submit" value="Search">
 </form>
 
 <?php
