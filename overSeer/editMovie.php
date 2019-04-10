@@ -42,7 +42,7 @@ if (isset($_GET['MovieIMDBID'])) {
 ?>
 <html>
 <body>
-<div class="container">
+
 <form method="post" action="editUpdate.php">
 
 <div style="padding: 30px 20px;
@@ -65,7 +65,7 @@ if (isset($_GET['MovieIMDBID'])) {
 
 	<div style="padding: 67px 20px;
 			position: absolute;
-			left: 600px;
+			left: 700px;
 			front-size: 30px;">
 
 	<label>Format:</label><br/>
@@ -74,21 +74,23 @@ if (isset($_GET['MovieIMDBID'])) {
     <input type="date" name="releaseDate" value=<?php echo $row["releaseDate"];?>><br/><br/>
 	<label>Writers :</label><br/>
     <input type="text" name="writer" value=<?php echo $row["writer"];?>><br/><br/>
+	<label>Image :</label><br/>
+    <input type="text" name="image" value=<?php echo $row["image"];?>><br/><br/>
    </div>
 
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="Movie">
 
-   <div style="padding: 300px 20px;
+   <div style="padding: 360px 20px;
 			position: absolute;
 			left: 700px;">
    <input type="submit" value="update"/>
    </div>
 </form>
- </div>
 
 
-<div style="padding: 300px 20px;
+
+<div style="padding: 360px 20px;
 			position: absolute;
 			left: 800px;">
 

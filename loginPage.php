@@ -34,7 +34,7 @@
 			front-size: 15px;}
 
 		body {
-  background-image: url("images.jpg");
+  background-image: url("image/images.jpg");
 
 }
 

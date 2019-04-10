@@ -25,6 +25,7 @@ $username = $_SESSION['admName'];
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
+	$oldPassword=$row["passwd"];
 
 //if the account holder is manager, then include manPage.php (manager account setting)
 //else display admin setting
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$name = $_POST["name"];
 	$phoneNumber = $_POST["phoneNumber"];
   if($_POST["password"] == ""){
-    $passwd = $row["password"];
+    $passwd = $oldPassword;
   }
   else{
 	   $passwd = $_POST["password"];
@@ -68,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if($count == 1){
 	  mysqli_close($con);
 	  header("Location:editAccount.php");
-	  die();
+	  //die();
 	 }
 	mysqli_close($con);
 

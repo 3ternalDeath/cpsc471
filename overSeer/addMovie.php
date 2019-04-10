@@ -55,9 +55,11 @@
 		<option value="comedy">comedy</option>
 		<option value="documentary">documentary</option>
 	</select> <br/><br/>
+	<label>Image :</label><br/>
+    <input type="text" name="image" value="image/default.png" /><br/><br/>
 
    </div>
-   <div style="padding: 380px 20px;
+   <div style="padding: 430px 20px;
 			position: absolute;
 			left: 710px;">
    <input type="submit" value="create"/>
@@ -79,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$releaseDate = $_POST["releaseDate"];
 	$writer = $_POST["writer"];
 	$genre = $_POST["genre"];
+	$image = $_POST["image"];
 
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
@@ -89,8 +92,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
   
-  $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer)
-  VALUES ('". $username ."','". $IMDBID ."','". $name ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."')";
+  $sql = "INSERT INTO Movie (addedBy, IMDBID, name, runTime, producer , synopsis, director, format, releaseDate, writer, image)
+  VALUES ('". $username ."','". $IMDBID ."','". $name ."','". $runTime ."' ,'". $producer ."','". $synopsis ."','". $director ."','".$format ."','".$releaseDate ."','". $writer."','".$image."')";
 
 	if (!mysqli_query($con,$sql))
 	{

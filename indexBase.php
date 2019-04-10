@@ -5,7 +5,7 @@
 	<title>Cinema</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-		body {background-image: url("images.jpg");
+		body {background-image: url("image/images.jpg");
 					font-family:Arial}
 
 		/*{box-sizing: border-box;}*/
@@ -132,7 +132,7 @@ window.onclick = function(event) {
 		if(!isset($_SESSION['admName'])){
 			echo "<a style='float:right' href='EmployeeLogin.php'>Login as Employee</a>";
 		}else {
-			echo "<a style='float:right' href='adminAccount.php'>Loged in as an Employee</a>";
+			echo "<a style='float:right' href='overSeer/adminAccount.php'>Loged in as an Employee</a>";
 		}
 
 	?>

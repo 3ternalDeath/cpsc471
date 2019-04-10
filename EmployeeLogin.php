@@ -34,7 +34,7 @@
 			top: 374px;}
 
 		body {
-			background-image: url("images.jpg");
+			background-image: url("image/images.jpg");
 		}
 	</style>
 
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if($count == 1){
 	  session_start();
 	  $_SESSION['admName'] = $userName;
-		header("Location:adminAccount.php");
+		header("Location:overSeer/adminAccount.php");
 		die();
 	 }
 

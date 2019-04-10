@@ -9,7 +9,7 @@ if(!isset($_SESSION['admName'])) {
 ?>
 <html>
 <body>
-<img src="image2.gif" style="padding: 50px 20px;
+<img src="../image/image2.gif" style="padding: 50px 20px;
 							position: absolute;
 							left: 300px;
 							width:180px;

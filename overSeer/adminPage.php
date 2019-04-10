@@ -7,13 +7,11 @@
 		die();
 	}
 	include("identify.php");
-	if( $flag==1){
+	if( $flag==0){
 		header("Location:Forbidden.html");
 		die();
 	}
-
 $username = $_SESSION['admName'];
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +47,7 @@ li a:hover:not(.active) {
 
 body {
 
-  background-image: url("image3.jpg");
+  background-image: url("../image/image3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -59,11 +57,12 @@ body {
 
 <ul>
   <li><a class="active" href="adminAccount.php">Home</a></li>
-  <li><a href="searchPeople.php">Search Customer</a></li>
-  <li><a href="searchShowTime.php">Search ShowTime</a></li>
-  <li><a href="searchMovie.php">Add ShowTime</a></li>
+  <li><a href="searchPeople.php">Search Manager</a></li>
+  <li><a href="addManager.php">Add Manager</a></li>
+  <li><a href="searchMovie.php">Search Movie</a></li>
+  <li><a href="addMovie.php">Add Movie</a></li>
   <li><a href="editAccount.php">Manage Account</a></li>
-  <li><a href="EmployeeLogout.php">Logout</a></li>
+  <li><a href="../EmployeeLogout.php">Logout</a></li>
 </ul>
 
 </body>
