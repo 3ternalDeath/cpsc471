@@ -116,6 +116,7 @@ window.onclick = function(event) {
 			<a href="searchByActor.php">Actor</a>
 		</div>
 	</div>
+	<a href="searchByCinema.php">Locations</a>
 	<a href="searchFood.php">Food</a>
 	<?php
 		if(!isset($_COOKIE["Cust_User"])){
