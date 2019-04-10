@@ -7,7 +7,7 @@
 		die();
 	}
 	include("identify.php");
-	if( $flag==1){
+	if( $flag==0){
 		header("Location:Forbidden.html");
 		die();
 	}
