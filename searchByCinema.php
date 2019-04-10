@@ -27,7 +27,12 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     echo "<a>"."The movie is played at ". $count." locations: "."</a>";
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 <<<<<<< HEAD
+<<<<<<< HEAD
       echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit' value='Select'></form>";
+=======
+      //echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'></form>";
+      echo "<a href='searchByMovieName.php?Addr=".$row["address"]."'>".$row["address"]."</a>";
+>>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
 =======
       //echo "<form method='get' action='viewShowTimes.php'>".$row['address']."  <input type='hidden' name='IMDB' value='".$_GET['IMDB']."'> <input type='hidden' name='Addr' value='".$row['address']."'></form>";
       echo "<a href='searchByMovieName.php?Addr=".$row["address"]."'>".$row["address"]."</a>";
@@ -46,7 +51,13 @@ if(!isset($_GET['IMDB'])){
   echo "<h1>"."We have ". $count." locations: "."</h1>";
   while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
 <<<<<<< HEAD
+<<<<<<< HEAD
     echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit' value='Select'></form>";
+=======
+    echo '<div style="padding: 20px 0px" >';
+    //echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
+    echo "<a href='searchByMovieName.php?Addr=".$row["address"]."'>".$row["address"]."</a>";
+>>>>>>> fc89e39f75e62f892d3811e2eb64608eac418cd3
 =======
     echo '<div style="padding: 20px 0px" >';
     //echo "<form method='get' action='searchByMovieName.php'>".$row['address']." <input type='hidden' name='Addr' value='".$row['address']."'> <input type='submit'></form>";
