@@ -90,11 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	<h1><?php echo $username;?></h1><br/>
 	<label>Update name: </label><br/>
-    <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>
+    <input type="text" name="name" value="<?php echo $row["name"];?>"><br/><br/>
 	<label>New Password :</label><br>
     <input type="password" name="password"><br/><br/>
 	<label>Update PhoneNumber :</label><br>
-    <input type="text" name="phoneNumber" value=<?php echo $row["phoneNumber"];?>><br/><br/><br/>
+    <input type="text" name="phoneNumber" value="<?php echo $row["phoneNumber"];?>"><br/><br/><br/>
 
    <input type="submit" value="update"/>
 </form>

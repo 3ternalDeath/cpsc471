@@ -53,15 +53,15 @@ if (isset($_GET['MovieIMDBID'])) {
 
 	<label>IMDBID : <?php echo $MovieIMDBID;?></label><br/><br/>
 	<label>Movie Name: </label><br/>
-    <input type="text" name="name" value=<?php echo $row["name"];?>></input><br/><br/>
+    <input type="text" name="name" value="<?php echo $row["name"];?>"></input><br/><br/>
 	<label>Run Time:</label><br/>
 	<input type="text" name="runTime" value=<?php echo $row["runTime"];?>></input><br/><br/>
 	<label>Producer :</label><br/>
-    <input type="text" name="producer" value=<?php echo $row["producer"];?>></input><br/><br/>
+    <input type="text" name="producer" value="<?php echo $row["producer"];?>"></input><br/><br/>
 	<label>Synopsis:</label><br/>
-	<textarea name="synopsis" rows="5" cols="30" value=<?php echo $row["synopsis"];?>></textarea><br/><br/>
+	<textarea name="synopsis" rows="5" cols="30" value="<?php echo $row["synopsis"];?>"></textarea><br/><br/>
 	<label>Director :</label><br/>
-    <input type="text" name="director" value=<?php echo $row["director"];?>></input><br/><br/>
+    <input type="text" name="director" value="<?php echo $row["director"];?>"></input><br/><br/>
 	
 	<div style="top: 70px;
 			position: absolute;
@@ -77,7 +77,7 @@ if (isset($_GET['MovieIMDBID'])) {
 	<label>Image :</label><br/>
     <input type="text" name="image" value=<?php echo $row["image"];?>><br/><br/>
    </div>
-
+	
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="Movie">
 

@@ -57,8 +57,8 @@
 	</select> <br/><br/>
 	<label>Image :</label><br/>
     <input type="text" name="image" value="image/default.png" /><br/><br/>
-
    </div>
+	
    <div style="padding: 430px 20px;
 			position: absolute;
 			left: 710px;">

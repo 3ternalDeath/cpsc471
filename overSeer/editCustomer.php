@@ -56,15 +56,15 @@ if (isset($_GET['holdername'])) {
 
 	<label>username : <?php echo $holdername;?></label><br/><br/>
 	<label>name: </label><br/>
-    <input type="text" name="name" value=<?php echo $row["name"];?>><br/><br/>
+    <input type="text" name="name" value="<?php echo $row["name"];?>"><br/><br/>
 	<label>Password :</label><br/>
-    <input type="password" name="password" value=<?php echo $row["passwd"];?>><br/><br/>
+    <input type="password" name="password" value="<?php echo $row["passwd"];?>"><br/><br/>
 	<label>age: </label><br/>
-    <input type="text" name="age" value=<?php echo $row["age"];?>><br/><br/>
+    <input type="text" name="age" value="<?php echo $row["age"];?>"><br/><br/>
 	<label>PhoneNumber :</label><br/>
-    <input type="text" name="phoneNumber" value=<?php echo $row["phoneNumber"];?>><br/><br/>
+    <input type="text" name="phoneNumber" value="<?php echo $row["phoneNumber"];?>"><br/><br/>
 	<label>Position : Customer</label><br/><br/>
-	<input type="hidden" name="holdername" value=<?php echo $holdername;?>>
+	<input type="hidden" name="holdername" value="<?php echo $holdername;?>">
 	<input type="hidden" name="tableName" value="Customer">
 
    <input type="submit" value="update"/>

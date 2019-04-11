@@ -55,13 +55,14 @@ include("indexBase.php");
     echo $count." results:";
 	echo '<div style="padding: 20px 0px" >';
     while($row = mysqli_fetch_assoc($result)){
-      echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/> "; 
+      echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/></a> "; 
 		echo str_repeat('&nbsp;', 10);		
 		}
  }
   if (isset($_GET['Addr'])){
     $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM Movie as M WHERE EXISTS(SELECT * FROM PlayIn as P WHERE P.cinemaAddr = ? AND P.movieIMDB = M.IMDBID)");
     $pram = "".$_GET['Addr'];
+	 $pass = $_GET['Addr'];
     mysqli_stmt_bind_param($prep, "s", $pram);
     mysqli_stmt_execute($prep);
     $result = mysqli_stmt_get_result($prep);
@@ -69,7 +70,7 @@ include("indexBase.php");
     echo $count." movies play at this location: ";
 	echo '<div style="padding: 20px 0px" >';
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-		echo "<a href='getShowTime.php?movieIMDBID=".$row["IMDBID"]."' movieLoc='".$_GET['Addr']."'><img src=".$row["image"]." height='300' width='210'/> "; 
+		echo "<a href='getShowTime.php?movieIMDBID=".$row["IMDBID"]."' & movieLoc=".$_GET['Addr']."'><img src=".$row["image"]." height='300' width='210'/></a> "; 
 		echo str_repeat('&nbsp;', 10);		
 		}
   }
@@ -84,7 +85,7 @@ include("indexBase.php");
     echo "<h1>We have ". $count." movies:</h1>";
 	echo '<div style="padding: 20px 0px" >';
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){	 
-		echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/> "; 
+		echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/></a> "; 
 		echo str_repeat('&nbsp;', 10);		
 		}
   }

@@ -27,6 +27,12 @@ if (isset($_GET['MovieIMDBID'])) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 //get account detail
+	$sql =  "SELECT name FROM movie WHERE IMDBID = '$MovieIMDBID'";
+	$result = mysqli_query($con,$sql);
+	$row = mysqli_fetch_assoc($result);
+	$count = mysqli_num_rows($result);
+	$movieName= $row["name"];
+	
 	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$MovieIMDBID' AND DTime='$DTime'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
@@ -53,7 +59,7 @@ if (isset($_GET['MovieIMDBID'])) {
 
 <form method="post" action="editUpdate.php">
 
-	<label>IMDB : <?php echo $MovieIMDBID;?></label><br/><br/>
+	<label>Name : <?php echo $movieName;?></label><br/><br/>
 	<label>Date: </label><br/>
     <input type="date" name="Date" value=<?php echo $DTime2[0];?>><br/><br/>
 	<label>Time: </label><br/>
@@ -61,9 +67,9 @@ if (isset($_GET['MovieIMDBID'])) {
 	<label>Price:</label><br/>
 	<input type="text" name="price" value=<?php echo $row["price"];?>><br/><br/>
 	<label>Cinema Address :</label><br/>
-    <input type="text" name="cinemaAddr" value=<?php echo $row["cinemaAddr"];?>><br/><br/>
+    <input type="text" name="cinemaAddr" value="<?php echo $row["cinemaAddr"];?>"><br/><br/>
 	<label>Room Number:</label><br/>
-    <input type="text" name="roomNum" value=<?php echo $row["roomNum"];?>><br/><br/>
+    <input type="text" name="roomNum" value="<?php echo $row["roomNum"];?>"><br/><br/>
 
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="ShowTime">
