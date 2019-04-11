@@ -6,8 +6,20 @@ include("indexBase.php");
 <html>
 <body>
 
-<form method="get" action="searchByMovieName.php">
-  Movie Name: <input type="text" name="Mname" value="<?php if(isset($_GET['Mname'])){echo $_GET['Mname'];}?>">
+<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+  Movie Name: <input type="text" name="Mname">
+
+	Genre:	<select name="Genre">
+		<option value="-">ANY</option>
+		<option value="romance">romance</option>
+		<option value="adventure">adventure</option>
+		<option value="action">action</option>
+		<option value="sci-fi">sci-fi</option>
+		<option value="comedy">comedy</option>
+		<option value="documentary">documentary</option>
+	</select> 
+
+  actor: <input type="text" name="actor">
   <input type="submit" value='Search'>
 </form>
 
@@ -20,21 +32,34 @@ include("indexBase.php");
   {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  if(isset($_GET['Mname'])){
-    $prep = mysqli_prepare($con,"SELECT IMDBID, name ,imageFROM Movie WHERE name LIKE ?");
-    $mname = "%".$_GET['Mname']."%";
-    mysqli_stmt_bind_param($prep, "s", $mname);
-    mysqli_stmt_execute($prep);
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		$actor = "%".$_POST['actor']."%";		
+		$filer = "%".$_POST['Mname']."%";
+		$Genre = $_POST['Genre'];
+   if($Genre=="-"){
+	   $prep = mysqli_prepare($con,"SELECT IMDBID, name ,image FROM Movie as M WHERE EXISTS (SELECT * FROM ActIn as I WHERE EXISTS(SELECT * FROM Actor as A WHERE A.name LIKE? AND M.name LIKE ? AND A.IMDBID=I.actorIMDB AND I.movieIMDB=M.IMDBID))");
+		if ( !$prep ) {
+		die('mysqli error: '.mysqli_error($con));
+		}	
+		mysqli_stmt_bind_param($prep, "ss",$actor, $filer);
+	}
+	else{
+    $prep = mysqli_prepare($con,"SELECT IMDBID, name, image From Movie as M WHERE EXISTS (SELECT * FROM Genre as G WHERE EXISTS (SELECT * FROM ActIn as I WHERE EXISTS(SELECT * FROM Actor as A WHERE A.name LIKE ? AND G.genre LIKE ? 
+	AND M.name LIKE ? AND A.IMDBID=I.actorIMDB AND I.movieIMDB=G.movieIMDB AND G.movieIMDB=M.IMDBID)))");
+		mysqli_stmt_bind_param($prep, "sss",$actor,$Genre, $filer);
+	}
+		
+	mysqli_stmt_execute($prep);
     $result = mysqli_stmt_get_result($prep);
     $count = mysqli_num_rows($result);
-    echo $count." results: ";
+    echo $count." results:";
 	echo '<div style="padding: 20px 0px" >';
-    while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+    while($row = mysqli_fetch_assoc($result)){
       echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/> "; 
 		echo str_repeat('&nbsp;', 10);		
 		}
-  }
-  else if (isset($_GET['Addr'])){
+ }
+  if (isset($_GET['Addr'])){
     $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM Movie as M WHERE EXISTS(SELECT * FROM PlayIn as P WHERE P.cinemaAddr = ? AND P.movieIMDB = M.IMDBID)");
     $pram = "".$_GET['Addr'];
     mysqli_stmt_bind_param($prep, "s", $pram);
@@ -44,24 +69,12 @@ include("indexBase.php");
     echo $count." movies play at this location: ";
 	echo '<div style="padding: 20px 0px" >';
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-		echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/> "; 
+		echo "<a href='getShowTime.php?movieIMDBID=".$row["IMDBID"]."' movieLoc='".$_GET['Addr']."'><img src=".$row["image"]." height='300' width='210'/> "; 
 		echo str_repeat('&nbsp;', 10);		
 		}
   }
-  else if(isset($_GET['Genre'])){
-    $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM Movie AS M WHERE EXISTS(SELECT * FROM Genre as G WHERE G.movieIMDB=M.IMDBID AND G.genre = ?)");
-    $parm = "".$_GET['Genre'];
-    mysqli_stmt_bind_param($prep, "s", $parm);
-    mysqli_stmt_execute($prep);
-    $result = mysqli_stmt_get_result($prep);
-    $count = mysqli_num_rows($result);
-    echo $count." movies have this genre: ";
-	echo '<div style="padding: 20px 0px" >';
-    while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-     echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/> "; 
-		echo str_repeat('&nbsp;', 10);		
-		}
-  }else{
+
+  else{
     $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM Movie WHERE name LIKE ?");
     $filer = "%";
     mysqli_stmt_bind_param($prep, "s", $filer);

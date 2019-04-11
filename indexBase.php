@@ -111,15 +111,8 @@ window.onclick = function(event) {
 
 <div class="topnav">
 	<a href="searchByCinema.php">Show Time</a>
-	<div class="dropdown">
-		<button class="dropbtn" onclick="myFunction()">Movie
-			<i class="fa fa-caret-down"></i></button>
-		<div class="dropdown-content" id="myDropdown">
-			<a href="searchByMovieName.php">Movie</a>
-			<a href="searchByGenre.php">Genre</a>
-			<a href="searchByActor.php">Actor</a>
-		</div>
-	</div>
+	<a href="searchByMovieName.php">Movie</a>
+
 	<a href="searchFood.php">Food</a>
 	<?php
 		if(!isset($_COOKIE["Cust_User"])){
