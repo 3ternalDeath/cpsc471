@@ -23,12 +23,12 @@ if (isset($_GET['movieIMDBID'])) {
   die('Error: ' . mysqli_error($con));
   }
   else{
-	  echo '<div style="position:absolute; top:250px; left: 600px"> Name:  '.$row["name"].' </div>';
-	  echo '<div style="position:absolute; top:290px; left: 600px"> Runtime  '.$row["runTime"].' </div>';
-	  echo '<div style="position:absolute; top:330px; left: 600px"> Release Date: '.$row["releaseDate"].' </div>';
-	   echo '<div style="position:absolute; top:370px; left: 600px"> Producer: '.$row["producer"].' </div>';
-	    echo '<div style="position:absolute; top:410px; left: 600px"> Director: '.$row["director"].' </div>';
-		echo '<div style="position:absolute; top:450px; left: 600px"> Synopsis: '.$row["synopsis"].' </div>';
+	  echo '<div style="position:absolute; top:250px; left: 600px"><b>Name: </b> '.$row["name"].' </div>';
+	  echo '<div style="position:absolute; top:290px; left: 600px"> <b>Runtime </b> '.$row["runTime"].' </div>';
+	  echo '<div style="position:absolute; top:330px; left: 600px"> <b>Release Date:</b> '.$row["releaseDate"].' </div>';
+	   echo '<div style="position:absolute; top:370px; left: 600px"> <b>Producer: </b>'.$row["producer"].' </div>';
+	    echo '<div style="position:absolute; top:410px; left: 600px"> <b>Director: </b>'.$row["director"].' </div>';
+		echo '<div style="position:absolute; top:450px; left: 600px"> <b>Synopsis:</b> '.$row["synopsis"].' </div>';
   }
 
   
@@ -47,7 +47,7 @@ if (isset($_GET['movieIMDBID'])) {
   $result = mysqli_query($con,$sql);
 
 	if (mysqli_num_rows($result) > 0) {
-		echo '<div style="position:absolute; top:250px; left: 900px" > Play In: ';
+		echo '<div style="position:absolute; top:250px; left: 900px" > <b>Play In:</b> ';
 		while($row = mysqli_fetch_assoc($result)) {
 			echo '<div style="position:absolute; top:40px; left: 0px" >'.$row["cinemaAddr"].'';
 		}
