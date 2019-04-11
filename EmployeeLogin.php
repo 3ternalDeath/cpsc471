@@ -98,8 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 mysqli_close($con);
 }
 ?>
-<form action="index.php" method="post">
-    <input type="submit" name= "return" value="return" />
+<form>
+    <input type="button" name="return" value="return" onclick="window.location.href='index.php'" />
 </form>
  </body>
 </html>

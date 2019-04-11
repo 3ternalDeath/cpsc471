@@ -70,7 +70,7 @@ include("indexBase.php");
     echo $count." movies play at this location: ";
 	echo '<div style="padding: 20px 0px" >';
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-		echo "<a href='getShowTime.php?movieIMDBID=".$row["IMDBID"]."' & movieLoc=".$_GET['Addr']."'><img src=".$row["image"]." height='300' width='210'/></a> "; 
+		echo "<a href='getShowTime.php?movieIMDBID=".$row["IMDBID"]."& movieLoc=".$_GET['Addr']."'><img src=".$row["image"]." height='300' width='210'/></a> "; 
 		echo str_repeat('&nbsp;', 10);		
 		}
   }

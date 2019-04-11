@@ -2,7 +2,7 @@
 include("indexBase.php");
 if (isset($_GET['movieIMDBID'])) {
 	$IMDBID =  $_GET['movieIMDBID'];
-	//$Loc=  $_GET['movieLoc'];
+	$movieLoc=  $_GET['movieLoc'];
  }
 
 // Create connection
@@ -35,15 +35,35 @@ if (isset($_GET['movieIMDBID'])) {
 							height:400px;">
 </body>
 </html>
+
 <?php
- $sql =  "SELECT cinemaAddr FROM PlayIn WHERE movieIMDB = '$IMDBID'";
-  $result = mysqli_query($con,$sql);
 
+	//get account detail
+	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$IMDBID' AND cinemaAddr='$movieLoc'";
+	$result = mysqli_query($con,$sql);
+
+ if (!mysqli_query($con,$sql))
+  {
+  die('Error: ' . mysqli_error($con));
+  }
+  
+  echo'<div style="position:absolute; top:250px; left: 600px">';
+  
+if(!isset($_COOKIE["Cust_User"])){
 	if (mysqli_num_rows($result) > 0) {
-		echo '<div style="position:absolute; top:250px; left: 900px" > <b>Play In:</b> ';
-		while($row = mysqli_fetch_assoc($result)) {
-			echo '<div style="position:absolute; top:40px; left: 0px" >'.$row["cinemaAddr"].'';
-		}
+	while($row = mysqli_fetch_assoc($result)) {
+	echo '<div style="padding: 20px 0px" >';
+	echo "Date/Time  ".$row["DTime"]." ---> $".$row["price"]."---> Room Number".$row["roomNum"];
 	}
-	?>
-
+	}
+}
+else{
+	if (mysqli_num_rows($result) > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+	echo '<div style="padding: 20px 0px" >';
+	echo "<a href='userAccount.php?MovieIMDBID=".$row["IMDB"]."'>Date/Time ".$row["DTime"]." ---> $".$row["price"]."---> Room Number".$row["roomNum"]."</a>";
+	}
+	}
+}
+  
+?>
