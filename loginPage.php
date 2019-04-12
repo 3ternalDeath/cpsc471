@@ -24,12 +24,21 @@
 			top: 354px;
 			height: 20px;
 			front-size: 15px;}
+			
+		input[name=return]{
+			width: 150px;
+			position: absolute;
+			margin-left:4%;
+			//padding:30px 16px;
+			top: 354px;
+			height: 20px;
+			front-size: 15px;}
 
 		a{
 			width: 150px;
 			position: absolute;
-			left:55%;
-			top: 354px;
+			left:47%;
+			top: 400px;
 			height: 20px;
 			front-size: 15px;}
 
@@ -48,6 +57,9 @@
    Password: <input type="password" name="password"/><br/><br/>
 
    <input type="submit" name= "login" value="login"/>
+</form>		
+<form>
+<input type="button"8 name="return" value="Back" onclick="window.location.href='index.php'" />
 </form>
 
 <a href="register.php">Need an account?</a>

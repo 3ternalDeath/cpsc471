@@ -48,7 +48,9 @@ li a:hover:not(.active) {
 body {
 
   background-image: url("../image/image3.jpg");
-  background-repeat: no-repeat;
+  background-repeat:repeat;
+background-attachment:fixed;
+overflow:scroll;
   background-size: cover;
 }
 </style>
@@ -67,3 +69,4 @@ body {
 
 </body>
 </html>
+

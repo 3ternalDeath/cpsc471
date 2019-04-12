@@ -62,7 +62,7 @@ else{
 	if (mysqli_num_rows($result) > 0) {
 	while($row = mysqli_fetch_assoc($result)) {
 	echo '<div style="padding: 20px 0px" >';
-	echo "<a href='purchaseTicket.php?MovieIMDBID= ".$row["IMDB"]." & DTime= ".$row["DTime"]." & cinemaAddr= ".$row["cinemaAddr"]." & roomNum= ".$row["roomNum"]."'>Date/Time ".$row["DTime"]." ---> $".$row["price"]."---> Room Number".$row["roomNum"]."</a>";
+	echo "<a href='purchaseTicket.php?MovieIMDBID=".$row["IMDB"]." & DTime=".$row["DTime"]." & cinemaAddr=".$row["cinemaAddr"]." & roomNum=".$row["roomNum"]."'>Date/Time ".$row["DTime"]." ---> $".$row["price"]."---> Room Number".$row["roomNum"]."</a>";
 	}
 	}
 }

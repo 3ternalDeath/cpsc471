@@ -1,7 +1,7 @@
 <html>
 <style>
 	form{padding: 30px 20px;
-			position: absolute;
+			position: fixed;
 			left: 400px;
 	front-size: 30px;}
 </style>

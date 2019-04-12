@@ -1,8 +1,8 @@
 <?php
 include("indexBase.php");
-if (!isset($_GET["movieIMDBID"])) {
+//if (!isset($_GET["foodID"])) {
 	$foodID =  $_GET['foodID'];
- }
+ //}
 
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
@@ -13,7 +13,7 @@ if (!isset($_GET["movieIMDBID"])) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 	//get account detail
-	$sql =  "SELECT * FROM Food WHERE foodID = '$foodID'";
+	$sql =  "SELECT * FROM Food WHERE foodID =".$foodID;
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
@@ -48,7 +48,7 @@ if (!isset($_GET["movieIMDBID"])) {
 <?php
 if(isset($_COOKIE['Cust_User'])){
 	echo '<form method="post" action="purchaseFood.php">';
-	echo '<input type="hidden" name="foodId" value='.$row["foodID"].'>';
+	echo '<input type="hidden" name="foodID" value='.$row["foodID"].'>';
 	echo '<input type="submit" value="purchase">';
 	echo '</form>';
 }

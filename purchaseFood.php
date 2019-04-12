@@ -1,7 +1,8 @@
 <?php
 
-if(!isset ($_POST['foodId']))
-	{$foodId =  $_POST['foodId'];}
+//if(!isset ($_POST['foodID'])){
+	$foodId =  $_POST['foodID'];
+//	}
 
  // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
