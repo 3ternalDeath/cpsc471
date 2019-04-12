@@ -31,7 +31,7 @@ if (isset($_GET["movieIMDBID"])) {
 		echo '<div style="position:absolute; top:450px; left: 600px"> <b>Synopsis:</b> '.$row["synopsis"].' </div>';
   }
 
-  
+
 ?>
 <html>
 <body>
@@ -47,9 +47,16 @@ if (isset($_GET["movieIMDBID"])) {
   $result = mysqli_query($con,$sql);
 
 	if (mysqli_num_rows($result) > 0) {
-		echo '<div style="position:absolute; top:250px; left: 900px" > <b>Play In:</b> ';
+		echo '<div style="position:absolute; top:250px; left: 900px" > <b>Play In:</b>';
 		while($row = mysqli_fetch_assoc($result)) {
-			echo '<div style="position:absolute; top:40px; left: 0px" >'.$row["cinemaAddr"].'';
+			if (isset($_GET["movieIMDBID"])) {
+				$gets = http_build_query(array('movieIMDBID'=>$_GET['movieIMDBID'], 'movieLoc'=>$row['cinemaAddr']));
+				echo '<div><a href="getShowTime.php?'.$gets.'">'.$row["cinemaAddr"].'</a></div>';
+			}
+			else{
+				echo '<div>'.$row["cinemaAddr"].'</div>';
+			}
 		}
+		echo "</div>";
 	}
 	?>
