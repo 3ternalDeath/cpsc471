@@ -18,6 +18,7 @@
 		$director = $_POST["director"];
 		$format = $_POST["format"];
 		$image = $_POST["image"];
+		$genre = $_POST["genre"];
 		$releaseDate = $_POST["releaseDate"];
 		$writer = $_POST["writer"];
 		$returnLocation="searchMovie.php";
@@ -27,6 +28,13 @@
 		$sql = "UPDATE Movie SET runTime='".$runTime."', name='".$name."', producer='".$producer."', synopsis='".$synopsis."', director='".$director."', format='".$format."' , releaseDate='".$releaseDate."', writer='".$writer."', image='".$image."'WHERE IMDBID = '$MovieIMDBID'";
 		if (!mysqli_query($con,$sql)){	  
 			die('Error: ' . mysqli_error($con));
+		}
+		if($genre=="-"){}
+		else{
+			$sql = "UPDATE Genre SET genre='".$genre."' WHERE movieIMDB = '$MovieIMDBID'";
+			if (!mysqli_query($con,$sql)){	  
+			die('Error: ' . mysqli_error($con));
+		}
 			}
 		}
 	}

@@ -76,12 +76,22 @@ if (isset($_GET['MovieIMDBID'])) {
     <input type="text" name="writer" value=<?php echo $row["writer"];?>><br/><br/>
 	<label>Image :</label><br/>
     <input type="text" name="image" value=<?php echo $row["image"];?>><br/><br/>
+	<label>Genre:</label><br/>
+	<select name="genre">
+		<option value="-">default</option>
+		<option value="romance">romance</option>
+		<option value="adventure">adventure</option>
+		<option value="action">action</option>
+		<option value="sci-fi">sci-fi</option>
+		<option value="comedy">comedy</option>
+		<option value="documentary">documentary</option>
+	</select> <br/><br/>
    </div>
 	
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="Movie">
 
-   <div style="top: 340px;
+   <div style="top: 370px;
 			position: absolute;
 			left: 300px;">
    <input type="submit" value="update"/>
@@ -90,7 +100,7 @@ if (isset($_GET['MovieIMDBID'])) {
 
 
 
-<div style="padding: 310px 20px;
+<div style="padding: 340px 20px;
 			position: absolute;
 			left: 400px;">
 

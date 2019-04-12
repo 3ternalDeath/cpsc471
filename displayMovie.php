@@ -1,6 +1,6 @@
 <?php
 include("indexBase.php");
-if (isset($_GET['movieIMDBID'])) {
+if (isset($_GET["movieIMDBID"])) {
 	$IMDBID =  $_GET['movieIMDBID'];
  }
 

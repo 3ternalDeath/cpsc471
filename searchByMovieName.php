@@ -87,7 +87,7 @@ include("indexBase.php");
     while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){	 
 		echo "<a href='displayMovie.php?movieIMDBID=".$row["IMDBID"]."'><img src=".$row["image"]." height='300' width='210'/></a> "; 
 		echo str_repeat('&nbsp;', 10);		
-		}
+	}
   }
 
 

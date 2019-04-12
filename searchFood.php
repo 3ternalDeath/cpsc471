@@ -13,9 +13,7 @@ include("indexBase.php");
 </style>
 
 <body>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
   <h1>Food and Drink</h1>
-</form>
 </body>
 </html>
 
@@ -31,21 +29,21 @@ include("indexBase.php");
     }
 
 
-  $sql = "SELECT name, type, price, size, description From Food";
+  $sql = "SELECT foodID, image, name, type From food";
   $result = mysqli_query($con,$sql);
+	$type="";
 
-  if (mysqli_num_rows($result) > 0) {
 
   echo '<div style="padding: 80px 20px; font-size:130%;">';
     while($row = mysqli_fetch_array($result)){
-      echo '<div style="padding: 20px 0px" >';
-    	echo "<a href='selectFood.php?food=".$row["name"]."'>".$row["name"]."  ".$row["size"]."</a>";
+		if($row["type"]==$type){}
+		else{
+			echo "<br/>".$row["type"]. "<br/><br/>";
+			}
+    	echo "<a href='selectFood.php?foodID=".$row["foodID"]."'><img src=".$row["image"]." height='200' width='200'/></a> ";
+		$type=$row["type"];
+		echo str_repeat('&nbsp;', 5);	
     }
 
-  }
-  else {
-    echo"<p align='center' style='color:red'>no match find</p>";
-  }
-
-mysqli_close($con);
+//mysqli_close($con);
 ?>
