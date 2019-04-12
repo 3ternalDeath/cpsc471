@@ -1,6 +1,3 @@
 <?php
-include("searchBYMovieName.php");
+include("searchByMovieName.php");
 ?>
-
-
-
