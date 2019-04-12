@@ -18,9 +18,8 @@ include("indexBase.php");
   {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  $prep = mysqli_prepare($con,"SELECT * FROM Ticket AS T, Movie AS M WHERE T.customer = ? AND M.IMDBID=T.IMDB AND T.DTime > ? ORDER BY T.DTime ASC;");
-  $curtime = date("Y-m-d H:i:s");
-  mysqli_stmt_bind_param($prep, "ss", $_COOKIE["Cust_User"], $curtime);
+  $prep = mysqli_prepare($con,"SELECT * FROM Ticket AS T, Movie AS M WHERE T.customer = ? AND M.IMDBID=T.IMDB ORDER BY T.DTime DESC;");
+  mysqli_stmt_bind_param($prep, "s", $_COOKIE["Cust_User"]);
   mysqli_stmt_execute($prep);
   $result = mysqli_stmt_get_result($prep);
   $count = mysqli_num_rows($result);
@@ -29,14 +28,17 @@ include("indexBase.php");
   }else{
     echo "<p>You do not have any tickets right now</p>";
   }
+  $curtime = date("Y-m-d H:i:s");
   while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
     echo "<p>";
     echo "Movie: ".$row['name']."<br>";
     echo "Location: ".$row['cinemaAddr']."<br>";
     echo "Date/Time: ".$row['DTime']."<br>";
     echo "Theater#: ".$row['roomNum']."<br>";
-    $gets = http_build_query(array('IMDB'=>$row['IMDB'], 'Addr'=>$row['cinemaAddr'], 'room'=>$row['roomNum'], 'DTime'=>$row['DTime']));
-    echo "<a href='removeTicket.php?".$gets."'> unbook ticket </a>";
+    if($curtime < $row['DTime']){
+      $gets = http_build_query(array('IMDB'=>$row['IMDB'], 'Addr'=>$row['cinemaAddr'], 'room'=>$row['roomNum'], 'DTime'=>$row['DTime']));
+      echo "<a href='removeTicket.php?".$gets."'> unbook ticket </a>";
+    }
     echo "</p><br>";
   }
 
