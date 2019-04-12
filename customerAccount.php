@@ -18,7 +18,7 @@ include("indexBase.php");
   {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  $prep = mysqli_prepare($con,"SELECT * FROM Ticket AS T, Movie AS M WHERE T.customer = ? AND M.IMDBID=T.IMDB AND T.DTime > ? ORDER BY T.DTime;");
+  $prep = mysqli_prepare($con,"SELECT * FROM Ticket AS T, Movie AS M WHERE T.customer = ? AND M.IMDBID=T.IMDB AND T.DTime > ? ORDER BY T.DTime ASC;");
   $curtime = date("Y-m-d H:i:s");
   mysqli_stmt_bind_param($prep, "ss", $_COOKIE["Cust_User"], $curtime);
   mysqli_stmt_execute($prep);
