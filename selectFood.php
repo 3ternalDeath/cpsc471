@@ -30,7 +30,7 @@ if (!isset($_GET["movieIMDBID"])) {
 
   }
 
-  
+
 ?>
 <html>
 <style>
@@ -45,10 +45,13 @@ if (!isset($_GET["movieIMDBID"])) {
 							left: 200px;
 							width:320px;
 							height:400px;">
-							
-<form method="post" action="purchaseFood.php">
- <input type="hidden" name="foodId" value=<?php echo $row["foodID"];?>>
- <input type="submit" value='purchase'>
-</form>
+<?php
+if(isset($_COOKIE['Cust_User'])){
+	echo '<form method="post" action="purchaseFood.php">';
+	echo '<input type="hidden" name="foodId" value='.$row["foodID"].'>';
+	echo '<input type="submit" value="purchase">';
+	echo '</form>';
+}
+?>
 </body>
 </html>

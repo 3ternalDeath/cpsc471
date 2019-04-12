@@ -24,7 +24,7 @@ if (isset($_GET['movieIMDBID'])) {
   die('Error: ' . mysqli_error($con));
   }
 
-  
+
 ?>
 <html>
 <body>
@@ -39,16 +39,17 @@ if (isset($_GET['movieIMDBID'])) {
 <?php
 
 	//get account detail
-	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$IMDBID' AND cinemaAddr='$movieLoc'";
+	$curtime = date("Y-m-d H:i:s");
+	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$IMDBID' AND cinemaAddr='$movieLoc' AND DTime > '".$curtime."'";
 	$result = mysqli_query($con,$sql);
 
  if (!mysqli_query($con,$sql))
   {
   die('Error: ' . mysqli_error($con));
   }
-  
+
   echo'<div style="position:absolute; top:250px; left: 600px">';
-  
+
 if(!isset($_COOKIE["Cust_User"])){
 	if (mysqli_num_rows($result) > 0) {
 	while($row = mysqli_fetch_assoc($result)) {
@@ -65,5 +66,5 @@ else{
 	}
 	}
 }
-  
+
 ?>

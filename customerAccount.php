@@ -25,9 +25,9 @@ include("indexBase.php");
   $result = mysqli_stmt_get_result($prep);
   $count = mysqli_num_rows($result);
   if($count > 0){
-    echo "<a>You have purchased ". $count." Tickets:</a>";
+    echo "<p>You have purchased ". $count." Tickets:</p>";
   }else{
-    echo "<a>You do not have any tickets right now</a>";
+    echo "<p>You do not have any tickets right now</p>";
   }
   while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
     echo "<p>";
@@ -37,6 +37,23 @@ include("indexBase.php");
     echo "Theater#: ".$row['roomNum']."<br>";
     $gets = http_build_query(array('IMDB'=>$row['IMDB'], 'Addr'=>$row['cinemaAddr'], 'room'=>$row['roomNum'], 'DTime'=>$row['DTime']));
     echo "<a href='removeTicket.php?".$gets."'> unbook ticket </a>";
+    echo "</p><br>";
+  }
+
+  $prep = mysqli_prepare($con,"SELECT * FROM Purchase AS P, Food AS F WHERE P.FoodID = F.FoodID AND P.customer = ?");
+  mysqli_stmt_bind_param($prep, "s", $_COOKIE["Cust_User"]);
+  mysqli_stmt_execute($prep);
+  $result = mysqli_stmt_get_result($prep);
+  $count = mysqli_num_rows($result);
+  if($count > 0){
+    echo "<p>You have purchased ". $count." Food items:</p>";
+  }else{
+    echo "<p>You do not have any food right now</p>";
+  }
+  while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+    echo "<p>";
+    echo "Item: ".$row['name']."<br>";
+    echo "Size: ".$row['size']."<br>";
     echo "</p><br>";
   }
 
