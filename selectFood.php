@@ -1,8 +1,8 @@
 <?php
 include("indexBase.php");
-//if (isset($_GET["movieIMDBID"])) {
+if (!isset($_GET["movieIMDBID"])) {
 	$foodID =  $_GET['foodID'];
-// }
+ }
 
 // Create connection
 	$con=mysqli_connect("localhost","root","","cinemaDB");
@@ -46,7 +46,7 @@ include("indexBase.php");
 							width:320px;
 							height:400px;">
 							
-<form>
+<form method="post" action="purchaseFood.php">
  <input type="hidden" name="foodId" value=<?php echo $row["foodID"];?>>
  <input type="submit" value='purchase'>
 </form>
