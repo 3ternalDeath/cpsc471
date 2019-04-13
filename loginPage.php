@@ -89,13 +89,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	mysqli_stmt_bind_param($prep, "ss", $userName, $passwd);
 	mysqli_stmt_execute($prep);
 	$result = mysqli_stmt_get_result($prep);
-	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	$count = mysqli_num_rows($result);
 
  if (!$result)
   {
   die('Error: ' . mysqli_error($con));
   }
+	$count = mysqli_num_rows($result);
 
  //authentication is suucessfule
   if($count == 1){

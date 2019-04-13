@@ -8,22 +8,22 @@ $con=mysqli_connect("localhost","root","","cinemaDB");
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 
-//restore the original setting if the name is null	
+//restore the original setting if the name is null
 	$holdername = $_POST['holdername'];
 	$tableName = $_POST['tableName'];
 	$returnLocation = $_POST['returnLocation'];
 	$columnName = $_POST['columnName'];
 	if($tableName=="Movie"){
-		$sql = "DELETE FROM Genre WHERE movieIMDB='$holdername'";
+		$sql = "DELETE FROM genre WHERE movieIMDB='$holdername'";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
-		$sql = "DELETE FROM ActIn WHERE movieIMDB='$holdername'";
+		$sql = "DELETE FROM actin WHERE movieIMDB='$holdername'";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
-		$sql = "DELETE FROM PlayIn WHERE movieIMDB='$holdername'";
+		$sql = "DELETE FROM playin WHERE movieIMDB='$holdername'";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
-		$sql = "DELETE FROM ShowTime WHERE IMDB='$holdername'";
+		$sql = "DELETE FROM showtime WHERE IMDB='$holdername'";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
 		$sql = "DELETE FROM $tableName WHERE $columnName='$holdername'";
-		}	
+		}
 	if (isset($_POST['columnName2'])) {
 		$holdername2 = $_POST['holdername2'];
 		$columnName2 = $_POST['columnName2'];
@@ -35,7 +35,7 @@ $con=mysqli_connect("localhost","root","","cinemaDB");
 	}
 	else{
 	$sql = "DELETE FROM $tableName WHERE $columnName='$holdername'";}
-	
+
 	 if (!mysqli_query($con,$sql))
 	{
 		echo '<script language="javascript">';

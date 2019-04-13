@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-  $sql = "INSERT INTO ShowTime (manUsr, IMDB, DTime, price,cinemaAddr , roomNum) VALUES ('". $username ."','". $IMDB ."','". $DTime ."','". $price ."' ,'".$cinemaAddr."','".$roomNum."')";
+  $sql = "INSERT INTO showtime (manUsr, IMDB, DTime, price,cinemaAddr , roomNum) VALUES ('". $username ."','". $IMDB ."','". $DTime ."','". $price ."' ,'".$cinemaAddr."','".$roomNum."')";
 
 	if (!mysqli_query($con,$sql))
 	{
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die();
 	}
 	else{
-		$sql = "INSERT INTO PlayIn (movieIMDB, cinemaAddr) VALUES ('". $IMDB ."','".$cinemaAddr."')";
+		$sql = "INSERT INTO playin (movieIMDB, cinemaAddr) VALUES ('". $IMDB ."','".$cinemaAddr."')";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
 		echo '<script language="javascript">';
 		echo 'alert("creation successful")';
