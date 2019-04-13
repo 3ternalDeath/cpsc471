@@ -64,7 +64,7 @@ if (mysqli_connect_errno($con))
 		}
  }
   if (isset($_GET['Addr'])){
-    $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM Movie as M WHERE EXISTS(SELECT * FROM PlayIn as P WHERE P.cinemaAddr = ? AND P.movieIMDB = M.IMDBID)");
+    $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM movie as M WHERE EXISTS(SELECT * FROM playin as P WHERE P.cinemaAddr = ? AND P.movieIMDB = M.IMDBID)");
     $pram = "".$_GET['Addr'];
 	 $pass = $_GET['Addr'];
     mysqli_stmt_bind_param($prep, "s", $pram);
@@ -80,7 +80,7 @@ if (mysqli_connect_errno($con))
   }
 
   else{
-    $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM Movie WHERE name LIKE ?");
+    $prep = mysqli_prepare($con,"SELECT IMDBID, name, image FROM movie WHERE name LIKE ?");
     $filer = "%";
     mysqli_stmt_bind_param($prep, "s", $filer);
     mysqli_stmt_execute($prep);

@@ -68,8 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 //authenticate user
-	$sql =  "SELECT userName, passwd, adminFlag FROM OverSeer WHERE userName = '$userName' and passwd = '$passwd'";
-	$prep = mysqli_prepare($con, "SELECT userName, passwd, adminFlag FROM OverSeer WHERE userName = ? and passwd = ?");
+	$prep = mysqli_prepare($con, "SELECT userName FROM overseer WHERE userName = ? and passwd = ?");
 	mysqli_stmt_bind_param($prep, "ss", $userName, $passwd);
 	mysqli_stmt_execute($prep);
 	$result = mysqli_stmt_get_result($prep);

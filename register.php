@@ -11,9 +11,11 @@
 			left: 600px;
 			}
 
-		body {
-			background-image: url("images.jpg");
-		}
+			body {background-image: url("image/images.jpg");
+			background-repeat:repeat;
+			background-attachment:fixed;
+			overflow:scroll;
+						font-family:Arial}
 	</style>
 <body>
 <div class="container">
