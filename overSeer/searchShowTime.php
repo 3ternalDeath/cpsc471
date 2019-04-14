@@ -50,15 +50,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$cinemaAddr = $_POST["cinemaAddr"];
 	$roomNum = $_POST["roomNum"];
 	if($cinemaAddr=="-" and $roomNum=="-"){
-		$sql = "SELECT IMDB, DTime From showtime  WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%'";
+		$sql = "SELECT S.IMDB, S.DTime, M.name From showtime AS S, movie AS M  WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%' AND IMDB = IMDBID";
 	}
 	else if($cinemaAddr=="-"){
-		$sql = "SELECT IMDB, DTime From showtime  WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%'AND roomNum LIKE '$roomNum'";
+		$sql = "SELECT S.IMDB, S.DTime, M.name From showtime AS S, movie AS M WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%'AND roomNum LIKE '$roomNum' AND IMDB = IMDBID";
 	}
 	else if($roomNum=="-"){
-		$sql = "SELECT IMDB, DTime From showtime  WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%' AND cinemaAddr LIKE '%$cinemaAddr%'";
+		$sql = "SELECT S.IMDB, S.DTime, M.name From showtime AS S, movie AS M WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%' AND cinemaAddr LIKE '%$cinemaAddr%' AND IMDB = IMDBID";
 	}
-	else{ $sql = "SELECT IMDB, DTime From showtime  WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%' AND cinemaAddr LIKE '%$cinemaAddr%' AND roomNum LIKE '$roomNum'";}
+	else{ $sql = "SELECT S.IMDB, S.DTime, M.name From showtime AS S, movie AS M WHERE IMDB LIKE '%$IMDB%' AND DTime LIKE '%$DTime%' AND price LIKE '%$price%' AND cinemaAddr LIKE '%$cinemaAddr%' AND roomNum LIKE '$roomNum' AND IMDB = IMDBID";}
 
   $result = mysqli_query($con,$sql);
 
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo"<h1 style='font-size:150%; color: green;'>Display</h1>";
     while($row = mysqli_fetch_assoc($result)) {
 		echo '<div style="padding: 20px 0px" >';
-        echo "<a href='editShowTime.php?MovieIMDBID=".$row["IMDB"]." & DTime=".$row["DTime"]."'>".$row["IMDB"]." ---> ".$row["DTime"]."</a>";
+        echo "<a href='editShowTime.php?MovieIMDBID=".$row["IMDB"]." & DTime=".$row["DTime"]."'>".$row["name"]." ---> ".$row["DTime"]."</a>";
     }
 	}
 else {

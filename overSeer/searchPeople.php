@@ -8,9 +8,9 @@
 			front-size: 30px;">
 	<h1>Modify Search</h1>
 	<label>Username :</label><br/>
-    <input type="text" name="username"/><br/><br/>
+  <input type="text" name="username"/><br/><br/>
 	<label>name :</label><br/>
-    <input type="text" name="name"/><br/><br/>
+  <input type="text" name="name"/><br/><br/>
 	<label>phoneNumber :</label><br/>
 	<input type="text" name="phoneNumber"/><br/><br/>
 	</div>
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$phoneNumber = $_POST["phoneNumber"];
 	$admFlag=false;
 
-if($flag==0){$sql = "SELECT username From Customer  WHERE userName LIKE '%$userName%' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";}
+if($flag==0){$sql = "SELECT username From customer  WHERE userName LIKE '%$userName%' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";}
 else{
 $sql = "SELECT username From overseer  WHERE username LIKE '%$userName%' AND adminFlag='$admFlag' AND name LIKE '%$name%' AND phoneNumber LIKE '%$phoneNumber%'";}
   $result = mysqli_query($con,$sql);
