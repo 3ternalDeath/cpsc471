@@ -87,7 +87,7 @@ if (isset($_GET['MovieIMDBID'])) {
     <input type="hidden" name="holdername" value=<?php echo $MovieIMDBID;?>>
 	 <input type="hidden" name="holdername2" value=<?php echo $DTime;?>>
 	 <input type="hidden" name="holdername3" value=<?php echo $row["cinemaAddr"];?>>
-	 <input type="hidden" name="tableName" value="ShowTime">
+	 <input type="hidden" name="tableName" value="showtime">
 	 <input type="hidden" name="columnName" value="IMDB">
 	 <input type="hidden" name="columnName2" value="DTime">
 	 <input type="hidden" name="returnLocation" value="searchShowTime.php">
