@@ -78,7 +78,7 @@ if (isset($_GET['holdername'])) {
 
 <form method="post" action="delete.php">
     <input type="hidden" name="holdername" value=<?php echo $holdername;?>>
-	 <input type="hidden" name="tableName" value="Customer">
+	 <input type="hidden" name="tableName" value="customer">
 	 <input type="hidden" name="columnName" value="userName">
 	 <input type="hidden" name="returnLocation" value="searchPeople.php">
     <input type="submit" value="delete">

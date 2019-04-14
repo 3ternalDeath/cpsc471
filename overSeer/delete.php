@@ -28,14 +28,13 @@ $con=mysqli_connect("localhost","root","","cinemaDB");
 		$holdername2 = $_POST['holdername2'];
 		$columnName2 = $_POST['columnName2'];
 		$holdername3 = $_POST['holdername3'];
-		$sql = "DELETE FROM PlayIn WHERE MovieIMDB='$holdername' AND cinemaAddr LIKE '%$holdername3%'";
+		$sql = "DELETE FROM playin WHERE MovieIMDB='$holdername' AND cinemaAddr LIKE '%$holdername3%'";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
 		$sql = "DELETE FROM $tableName WHERE $columnName='$holdername' AND $columnName2 = '$holdername2'";
 		if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
 	}
 	else{
 	$sql = "DELETE FROM $tableName WHERE $columnName='$holdername'";}
-
 	 if (!mysqli_query($con,$sql))
 	{
 		echo '<script language="javascript">';
