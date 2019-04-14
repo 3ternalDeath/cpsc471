@@ -32,8 +32,8 @@ if (isset($_GET['MovieIMDBID'])) {
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
 	$movieName= $row["name"];
-	
-	$sql =  "SELECT * FROM ShowTime WHERE IMDB = '$MovieIMDBID' AND DTime='$DTime'";
+
+	$sql =  "SELECT * FROM showtime WHERE IMDB = '$MovieIMDBID' AND DTime='$DTime'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);

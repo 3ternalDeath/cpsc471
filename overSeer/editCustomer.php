@@ -28,7 +28,7 @@ if (isset($_GET['holdername'])) {
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 //get account detail
-	$sql =  "SELECT name, phoneNumber, passwd, username, age FROM Customer WHERE userName = '$holdername'";
+	$sql =  "SELECT name, phoneNumber, passwd, username, age FROM customer WHERE userName = '$holdername'";
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_assoc($result);
 	$count = mysqli_num_rows($result);
