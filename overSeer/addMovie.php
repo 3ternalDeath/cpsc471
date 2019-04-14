@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if($IMDBID==""){echo"<p align='center' style='color:red'>IMDBID field cannot be emplty</p>";}
 		if($name==""){echo"<p align='center' style='color:red'>name field cannot be empty</p>";}
 		if($runTime==""){echo"<p align='center' style='color:red'>runTime field cannot be empty</p>";}
-		if($releaseDate==""){echo"<p align='center' style='color:red'>releaseDater field cannot be empty</p>";}
+		if($releaseDate==""){echo"<p align='center' style='color:red'>releaseDate field cannot be empty</p>";}
 		else{
 		echo"<p align='center' style='color:red'>IMDBID is already registered</p>";}
 

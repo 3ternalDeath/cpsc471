@@ -42,8 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if (!mysqli_query($con,$sql))
 	{
-		if($DTime==""){echo"<p align='center' style='color:red'>DTime field cannot be emplty</p>";}
-		if($price==""){echo"<p align='center' style='color:red'>price field cannot be empty</p>";}
+		echo '<script language="javascript">';
+		echo 'alert("creation deny, ShowTime already exists")';
+		echo '</script>';
+		header( "refresh:0;url=searchMovie.php" );
 		die();
 	}
 	else{
