@@ -73,6 +73,9 @@ if (isset($_GET['MovieIMDBID'])) {
 
 	<input type="hidden" name="MovieIMDBID" value=<?php echo $MovieIMDBID;?>>
 	<input type="hidden" name="tableName" value="ShowTime">
+	<input type="hidden" name="OldDTime" value="<?php echo $row["DTime"];?>">
+	<input type="hidden" name="OldcinemaAddr" value="<?php echo $row["cinemaAddr"];?>">
+	<input type="hidden" name="OldroomNum" value="<?php echo $row["roomNum"];?>">
 
 
    <input type="submit" value="update"/>

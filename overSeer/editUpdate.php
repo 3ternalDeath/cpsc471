@@ -80,13 +80,17 @@
 		$cinemaAddr = $_POST["cinemaAddr"];
 		$roomNum = $_POST["roomNum"];
 		$returnLocation="searchPeople.php";
+		
+		$ODTime = $_POST["OldDTime"];
+		$OcinemaAddr = $_POST["OldcinemaAddr"];
+		$OroomNum = $_POST["OldroomNum"];
 
 		if($DTime=="" or $price==""){$flag=false;}
 
 		if($flag==true){
 			$sql = "UPDATE playin SET cinemaAddr='".$cinemaAddr."'WHERE MovieIMDB = '$MovieIMDBID'";
 			if (!mysqli_query($con,$sql)){echo mysqli_error($con);}
-		$sql = "UPDATE showtime SET DTime='".$DTime."', price='".$price."', cinemaAddr='".$cinemaAddr."', roomNum='".$roomNum."' WHERE IMDB = '$MovieIMDBID'";
+			$sql = "UPDATE showtime SET DTime='".$DTime."', price='".$price."', cinemaAddr='".$cinemaAddr."', roomNum='".$roomNum."' WHERE IMDB = '$MovieIMDBID' AND cinemaAddr = '$OcinemaAddr' AND roomNum = '$OroomNum'";
 		if (!mysqli_query($con,$sql)){
 			die('Error: ' . mysqli_error($con));
 			}

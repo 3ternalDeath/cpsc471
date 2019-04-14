@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	mysqli_stmt_execute($prep);
 	$result = mysqli_stmt_get_result($prep);
 
- if (!$result))
+ if (!$result)
   {
   die('Error: ' . mysqli_error($con));
   }
