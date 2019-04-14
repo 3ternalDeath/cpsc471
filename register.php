@@ -58,9 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-  $sql = "INSERT INTO Customer (userName, passwd, CCInfo, age, name, phoneNumber) VALUES ('". $userName ."','". $passwd ."','". $CCInfo ."','". $age ."','". $name ."','". $phoneNumber ."')";
-	$prep = mysqli_prepare($con, "INSERT INTO Customer (userName, passwd, CCInfo, age, name, phoneNumber) VALUES (?,?,?,?,?,?)");
-	mysqli_stmt_bind_param($prep, "ssssss", $userName, $passwd,$CCInfo,$age,$name,$phoneNumber);
+	$prep = mysqli_prepare($con, "INSERT INTO customer (userName, passwd, CCInfo, age, name, phoneNumber) VALUES (?,?,?,?,?,?)");
+	mysqli_stmt_bind_param($prep, "sssiss", $userName, $passwd,$CCInfo,$age,$name,$phoneNumber);
 
 	if (!mysqli_stmt_execute($prep))
 	{
