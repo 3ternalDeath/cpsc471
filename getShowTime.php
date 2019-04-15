@@ -57,6 +57,10 @@ if(!isset($_COOKIE["Cust_User"])){
 	echo "Date/Time  ".$row["DTime"]." ---> $".$row["price"]."---> Room Number".$row["roomNum"];
 	}
 	}
+	else{
+		echo '<div style="padding: 20px 0px" >';
+		echo "<b>no avalible showtime</b>";
+	}
 }
 else{
 	if (mysqli_num_rows($result) > 0) {
@@ -64,6 +68,10 @@ else{
 	echo '<div style="padding: 20px 0px" >';
 	echo "<a href='purchaseTicket.php?MovieIMDBID=".$row["IMDB"]." & DTime=".$row["DTime"]." & cinemaAddr=".$row["cinemaAddr"]." & roomNum=".$row["roomNum"]."'>Date/Time ".$row["DTime"]." ---> $".$row["price"]."---> Room Number".$row["roomNum"]."</a>";
 	}
+	}
+	else{
+		echo '<div style="padding: 20px 0px" >';
+		echo "<b>no avalible showtime</b>";
 	}
 }
 
